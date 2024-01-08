@@ -13,10 +13,21 @@ function Home() {
         FontSize: 30,
         Color: "#763c00",
       },
+      Slogan: {
+        Sub: "Big Promotion.",
+        SubColor: "#763c00",
+        SubFontSize: 20,
+        Value: "30% OFF",
+        FontSize: 70,
+        Color: "#763c00",
+      },
+      Button: {
+        LineColor: "#763c00",
+        BackgroundColor: "#763c00",
+        Title: "Book Now",
+        Color: "#ffffff",
+      },
       Color: "#763c00",
-      ButtonText: "Book Now",
-      SaleLabel: "Big Promotion.",
-      SaleText: "30% OFF",
       Logo: "/images/theme1/logo-1.png",
       Background: "/images/theme1/background.png",
     },
@@ -26,14 +37,20 @@ function Home() {
 
   const componentRef = useRef();
 
-  const { Title, Color, SaleLabel, SaleText, ButtonText, Logo, Background } =
-    watch();
+  const {
+    Title,
+    Color,
+    Logo,
+    Background,
+    Button,
+    Slogan,
+  } = watch();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="h-full flex flex-col">
-      <div className="flex-grow flex">
-        <div className="w-[400px] p-5 bg-white">
-          <div className="border-b pb-5 mb-5 grid grid-cols-2 gap-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col h-full">
+      <div className="flex flex-grow h-full">
+        <div className="w-[400px] p-5 bg-white h-full overflow-auto">
+          <div className="grid grid-cols-2 gap-5 pb-5 mb-5 border-b">
             <div>
               <div className="text-[12px] text-[#939393] mb-1 font-light">
                 Logo
@@ -155,7 +172,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="border-b pb-5 mb-5">
+          <div className="pb-5 mb-5 border-b">
             <div className="mb-5">
               <div className="text-[12px] text-[#939393] mb-1 font-light">
                 Nhập tiêu đề
@@ -186,7 +203,10 @@ function Home() {
                       className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
                       type="text"
                       placeholder="Nhập text"
-                      {...field}
+                      value={field.value}
+                      onValueChange={({ floatValue }) =>
+                        field.onChange(floatValue)
+                      }
                     />
                   )}
                 />
@@ -210,71 +230,200 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="border-b pb-5 mb-5">
-            <div className="mb-3 last:mb-0">
+          <div className="pb-5 mb-5 border-b">
+            <div className="mb-5">
+              <div className="text-[12px] text-[#939393] mb-1 font-light">
+                Tiêu đề Sub Slogan
+              </div>
               <Controller
-                name="SaleLabel"
+                name="Slogan.Sub"
                 control={control}
                 render={({ field }) => (
                   <input
                     className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
                     type="text"
-                    placeholder="Nhập tiêu đề"
+                    placeholder="Nhập text"
                     {...field}
                   />
                 )}
               />
             </div>
-            <div className="mb-3 last:mb-0">
+            <div className="grid grid-cols-2 gap-5 mb-5">
+              <div>
+                <div className="text-[12px] text-[#939393] mb-1 font-light">
+                  Cỡ chữ Sub Slogan
+                </div>
+                <Controller
+                  name="Slogan.SubFontSize"
+                  control={control}
+                  render={({ field }) => (
+                    <NumericFormat
+                      className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                      type="text"
+                      placeholder="Nhập cỡ chữ"
+                      value={field.value}
+                      onValueChange={({ floatValue }) =>
+                        field.onChange(floatValue)
+                      }
+                    />
+                  )}
+                />
+              </div>
+              <div>
+                <div className="text-[12px] text-[#939393] mb-1 font-light">
+                  Màu chữ Sub Slogan
+                </div>
+                <Controller
+                  name="Slogan.SubColor"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                      type="text"
+                      placeholder="Nhập mã màu"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+            <div className="mb-5">
+              <div className="text-[12px] text-[#939393] mb-1 font-light">
+                Tiêu đề Slogan
+              </div>
               <Controller
-                name="SaleText"
+                name="Slogan.Value"
                 control={control}
                 render={({ field }) => (
                   <input
                     className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
                     type="text"
-                    placeholder="Nhập tiêu đề"
+                    placeholder="Nhập text"
                     {...field}
                   />
                 )}
               />
             </div>
-          </div>
-          <div className="mb-3">
-            <div>Mã màu</div>
-            <Controller
-              name="Color"
-              control={control}
-              render={({ field }) => (
-                <input
-                  className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                  type="text"
-                  placeholder="Nhập mã màu"
-                  {...field}
+            <div className="grid grid-cols-2 gap-5">
+              <div>
+                <div className="text-[12px] text-[#939393] mb-1 font-light">
+                  Cỡ chữ Slogan
+                </div>
+                <Controller
+                  name="Slogan.FontSize"
+                  control={control}
+                  render={({ field }) => (
+                    <NumericFormat
+                      className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                      type="text"
+                      placeholder="Nhập cỡ chữ"
+                      value={field.value}
+                      onValueChange={({ floatValue }) =>
+                        field.onChange(floatValue)
+                      }
+                    />
+                  )}
                 />
-              )}
-            />
-          </div>
-          <div className="mb-3">
-            <Controller
-              name="ButtonText"
-              control={control}
-              render={({ field }) => (
-                <input
-                  className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                  type="text"
-                  placeholder="Nhập tiêu đề button"
-                  {...field}
+              </div>
+              <div>
+                <div className="text-[12px] text-[#939393] mb-1 font-light">
+                  Màu chữ Slogan
+                </div>
+                <Controller
+                  name="Slogan.Color"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                      type="text"
+                      placeholder="Nhập mã màu"
+                      {...field}
+                    />
+                  )}
                 />
-              )}
-            />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="grid grid-cols-2 gap-5 mb-5">
+              <div>
+                <div className="text-[12px] text-[#939393] mb-1 font-light">
+                  Tiêu đề Button
+                </div>
+                <Controller
+                  name="Button.Title"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                      type="text"
+                      placeholder="Nhập text"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+              <div>
+                <div className="text-[12px] text-[#939393] mb-1 font-light">
+                  Màu nền Button
+                </div>
+                <Controller
+                  name="Button.BackgroundColor"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                      type="text"
+                      placeholder="Nhập mã màu"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-5">
+              <div>
+                <div className="text-[12px] text-[#939393] mb-1 font-light">
+                  Màu chữ Button
+                </div>
+                <Controller
+                  name="Button.Color"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                      type="text"
+                      placeholder="Nhập mã màu"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+              <div>
+                <div className="text-[12px] text-[#939393] mb-1 font-light">
+                  Màu Line
+                </div>
+                <Controller
+                  name="Button.LineColor"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                      type="text"
+                      placeholder="Nhập text"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex flex-col h-full flex-1">
-          <div className="grow flex items-center justify-center font-alegreya">
+        <div className="flex flex-col flex-1 h-full">
+          <div className="flex items-center justify-center overflow-auto grow font-alegreya">
             <div
               ref={componentRef}
-              className="bg-no-repeat bg-cover relative"
+              className="relative bg-no-repeat bg-cover"
               style={{
                 width: 600,
                 height: 600,
@@ -311,13 +460,25 @@ function Home() {
                 </div>
                 <div
                   className={clsx(`p-6 text-center`)}
-                  style={{
-                    color: Color,
-                  }}
                 >
-                  <div className="uppercase text-[20px]">{SaleLabel}</div>
-                  <div className="text-[70px] font-medium leading-[70px] mt-5">
-                    {SaleText}
+                  <div
+                    className="uppercase"
+                    style={{
+                      fontSize: (Slogan.SubFontSize || 20) + "px",
+                      color: Slogan.SubColor,
+                    }}
+                  >
+                    {Slogan.Sub}
+                  </div>
+                  <div
+                    className="mt-5 font-medium"
+                    style={{
+                      fontSize: (Slogan.FontSize || 70) + "px",
+                      lineHeight: (Slogan.FontSize || 70) + "px",
+                      color: Slogan.Color,
+                    }}
+                  >
+                    {Slogan.Value}
                   </div>
                 </div>
               </div>
@@ -329,23 +490,24 @@ function Home() {
                 <div
                   className="absolute top-2/4 w-[calc(100%-30px)] h-[1px] left-[30px]"
                   style={{
-                    background: Color,
+                    background: Button.LineColor,
                   }}
                 ></div>
                 <span
                   className={clsx(
-                    `text-white relative z-10 rounded-[30px] px-4 py-1.5`
+                    `text-white relative z-10 rounded-[30px] px-4 py-1.5 ml-[30px]`
                   )}
                   style={{
-                    background: Color,
+                    background: Button.BackgroundColor,
+                    color: Button.Color,
                   }}
                 >
-                  {ButtonText}
+                  {Button.Title}
                 </span>
               </div>
             </div>
           </div>
-          <div className="bg-white px-4 py-3 flex justify-between">
+          <div className="flex justify-between px-4 py-3 bg-white border-l">
             <div></div>
             <div>
               <button
