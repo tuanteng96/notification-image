@@ -9,3 +9,27 @@ body {
 #root {
     @apply w-full h-full
 }
+
+.picker-color input {
+    @apply h-12 border border-[#bfc4c8] rounded pr-3 pl-10 transition
+}
+
+.picker-color input:focus {
+    outline: none;
+    border-color: #3699FF;
+}
+
+.picker-color .colorSquare {
+    margin-left: 12px;
+    width: 100% !important;
+}
+
+.picker-color .colorSquare~div {
+    right: 0;
+    top: auto;
+    bottom: 75%;
+}
+
+.picker-color .chrome-picker {
+    @apply !font-sans
+}
