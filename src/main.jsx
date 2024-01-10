@@ -12,12 +12,16 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "",
+        path: "/thietke/source/index.html/1",
         element: <Home />,
       },
       {
+        path: "/thietke/source/index.html/2",
+        element: <div>Template 2</div>,
+      },
+      {
         path: "1",
-        element: <div>1</div>,
+        element: <Home />,
       },
       {
         path: "2",

@@ -1,4 +1,4 @@
-import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
+﻿import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import { ColorPicker } from "@wellbees/color-picker-input";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
@@ -29,8 +29,8 @@ function Home() {
         Color: "#ffffff",
       },
       Color: "#763c00",
-      Logo: "/images/theme1/logo-1.png",
-      Background: "/images/theme1/background.png",
+      Logo: "/Thietke/myimage/logo-1.png",
+      Background: "/Thietke/myimage/bg-1.png",
       Width: 600,
       Height: 600,
     },
@@ -63,7 +63,21 @@ function Home() {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-grow md:h-full flex-col md:flex-row"
     >
-      <div className="w-full md:w-[300px] md:min-w-[300px] lg:w-[400px] lg:min-w-[400px] p-5 bg-white h-full overflow-auto order-last md:order-first">
+      <div className="w-full md:w-[300px] md:min-w-[300px] lg:w-[400px] lg:min-w-[400px] p-5 bg-white h-full md:overflow-auto order-last md:order-first">
+        <div className="md:hidden">
+          <button
+            type="button"
+            className="bg-primary text-white h-[38px] px-4 rounded flex items-center justify-center w-full mb-5"
+            onClick={() =>
+              exportComponentAsPNG(componentRef, {
+                fileName: "Notifications 1",
+              })
+            }
+          >
+            <ArrowDownTrayIcon className="w-5 mr-2" />
+            Tải xuống
+          </button>
+        </div>
         <div className="grid grid-cols-4 md:grid-cols-2 gap-5 mb-5">
           <div>
             <div className="flex items-center justify-center w-full">

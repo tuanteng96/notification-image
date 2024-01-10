@@ -33,3 +33,7 @@ body {
 .picker-color .chrome-picker {
     @apply !font-sans
 }
+
+.picker-color .resetButtonArea {
+    display: none !important;
+}
