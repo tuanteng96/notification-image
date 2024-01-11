@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { exportComponentAsPNG } from "react-component-export-image";
 import { Controller, useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
+import html2canvas from "html2canvas";
 
 function Home() {
   const { control, handleSubmit, watch } = useForm({
@@ -68,11 +69,16 @@ function Home() {
           <button
             type="button"
             className="bg-primary text-white h-[38px] px-4 rounded flex items-center justify-center w-full mb-5"
-            onClick={() =>
-              exportComponentAsPNG(componentRef, {
-                fileName: "Notifications 1",
-              })
-            }
+            onClick={async () => {
+              const canvas = await html2canvas(componentRef.current);
+              const image = canvas.toDataURL("image/png", 1.0);
+              window?.parent?.postMessage(
+                JSON.stringify({
+                  Image: image,
+                }),
+                "*"
+              );
+            }}
           >
             <ArrowDownTrayIcon className="w-5 mr-2" />
             Tải xuống
@@ -488,7 +494,7 @@ function Home() {
               ></div>
               <span
                 className={clsx(
-                  `text-white relative z-10 rounded-[30px] px-4 py-1.5 ml-[30px]`
+                  `text-white relative z-10 rounded-[30px] px-4 ml-[30px] h-[32px] flex items-center justify-center`
                 )}
                 style={{
                   background: Button.BackgroundColor,
@@ -506,11 +512,16 @@ function Home() {
             <button
               type="button"
               className="bg-primary text-white h-[42px] px-4 rounded flex items-center justify-center"
-              onClick={() =>
-                exportComponentAsPNG(componentRef, {
-                  fileName: "Notifications 1",
-                })
-              }
+              onClick={async () => {
+                const canvas = await html2canvas(componentRef.current);
+                const image = canvas.toDataURL("image/png", 1.0);
+                window?.parent?.postMessage(
+                  JSON.stringify({
+                    Image: image,
+                  }),
+                  "*"
+                );
+              }}
             >
               <ArrowDownTrayIcon className="w-5 mr-2" />
               Tải xuống
