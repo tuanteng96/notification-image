@@ -12,6 +12,7 @@
   "dependencies": {
     "@heroicons/react": "^2.1.1",
     "@wellbees/color-picker-input": "^1.0.1",
+    "axios": "^1.6.5",
     "clsx": "^2.1.0",
     "html2canvas": "^1.4.1",
     "react": "^18.2.0",
