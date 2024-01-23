@@ -37,3 +37,7 @@ body {
 .picker-color .resetButtonArea {
     display: none !important;
 }
+
+.el-scale {
+    transform: scale(var(--el-scale, 1))
+}

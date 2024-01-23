@@ -13,7 +13,8 @@ export default {
         },
         fontFamily: {
             'sans': ['Be Vietnam Pro', 'system-ui'],
-            'alegreya': ['Alegreya Sans', 'system-ui']
+            'alegreya': ['Alegreya Sans', 'system-ui'],
+            'ephesis': ['Ephesis', 'system-ui']
         }
     },
     plugins: [],

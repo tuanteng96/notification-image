@@ -1,4 +1,4 @@
-﻿import { ArrowDownTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { ArrowDownTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { ColorPicker } from "@wellbees/color-picker-input";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
@@ -7,33 +7,43 @@ import { NumericFormat } from "react-number-format";
 import html2canvas from "html2canvas";
 import axios from "axios";
 import { toAbsolutePath } from "../helpers/assetPath";
+import * as htmlToImage from "html-to-image";
 
-function Home() {
+function Template2() {
   const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       Title: {
-        Value: "Beauty Treatment",
+        Value: "Must Have!",
         FontSize: 30,
-        Color: "#763c00",
+        Color: "#B53E65",
       },
       Slogan: {
-        Sub: "Big Promotion.",
-        SubColor: "#763c00",
-        SubFontSize: 20,
+        Sub: "Volumizing",
+        SubColor: "#B53E65",
+        SubFontSize: 50,
+        SubTitle: "mascara",
+        SubTitleColor: "#B53E65",
+        SubTitleFontSize: 70,
         Value: "30% OFF",
-        FontSize: 70,
-        Color: "#763c00",
+        FontSize: 32,
+        Color: "#fff",
+        Background: "#B53E65",
       },
       Button: {
-        LineColor: "#763c00",
-        BackgroundColor: "#763c00",
-        Title: "Book Now",
+        BackgroundColor: "#B53E65",
+        Title: "Shop Now",
         Color: "#ffffff",
+        FontSize: 22,
       },
-      Color: "#763c00",
-      Logo: "/Thietke/myimage/logo-1.png",
-      Background: "/Thietke/myimage/bg-1.png",
+      Copyright: {
+        Value: "@reallygreatsite",
+        FontSize: 22,
+        Color: "#B53E65",
+      },
+      Images: "/Thietke/myimage/anh-2.png",
+      Icon: "/Thietke/myimage/icon-2.png",
+      Background: "#F8F3E3",
       Width: 600,
       Height: 600,
     },
@@ -46,8 +56,17 @@ function Home() {
   const componentRef = useRef();
   const elRef = useRef();
 
-  const { Title, Color, Logo, Background, Button, Slogan, Width, Height } =
-    watch();
+  const {
+    Title,
+    Background,
+    Icon,
+    Slogan,
+    Width,
+    Height,
+    Images,
+    Copyright,
+    Button,
+  } = watch();
 
   useEffect(() => {
     if (elRef && elRef?.current) {
@@ -66,35 +85,52 @@ function Home() {
     return url.split("token=")[1];
   };
 
+  const filter = (node) => {
+    console.log(node?.className);
+    if (node.className && node.className.includes("el-scale")) {
+      console.log(node.className);
+    }
+    return node
+  };
+
   const onExportImage = async () => {
     setIsLoading(true);
-    const canvas = await html2canvas(componentRef.current);
-    const image = canvas.toDataURL("image/png", 1.0);
-    var bodyFormData = new FormData();
-    bodyFormData.append("title", "mau-1-" + new Date().valueOf());
-    bodyFormData.append("base64", image);
-    console.log(image);
-    // axios
-    //   .post(
-    //     `${
-    //       import.meta.env.DEV ? "https://cser.vn" : ""
-    //     }/api/v3/file?cmd=base64`,
-    //     bodyFormData,
-    //     {
-    //       headers: { Authorization: `Bearer ${getTokenParams()}` },
-    //     }
-    //   )
-    //   .then(({ data, error }) => {
-    //     if (!error) {
-    //       window?.parent?.postMessage(
-    //         JSON.stringify({
-    //           Image: data?.src || "",
-    //         }),
-    //         "*"
-    //       );
-    //     }
-    //     setIsLoading(false);
-    //   });
+    htmlToImage
+      .toPng(componentRef.current, {
+        canvasWidth: 600,
+        canvasHeight: 600,
+        pixelRatio: 1,
+        skipAutoScale: true,
+        cacheBust: true,
+        filter: filter,
+      })
+      .then(function (image) {
+        console.log(image);
+        // var bodyFormData = new FormData();
+        // bodyFormData.append("title", "mau-2-" + new Date().valueOf());
+        // bodyFormData.append("base64", image);
+        // axios
+        //   .post(
+        //     `${
+        //       import.meta.env.DEV ? "https://cser.vn" : ""
+        //     }/api/v3/file?cmd=base64`,
+        //     bodyFormData,
+        //     {
+        //       headers: { Authorization: `Bearer ${getTokenParams()}` },
+        //     }
+        //   )
+        //   .then(({ data, error }) => {
+        //     if (!error) {
+        //       window?.parent?.postMessage(
+        //         JSON.stringify({
+        //           Image: data?.src || "",
+        //         }),
+        //         "*"
+        //       );
+        //     }
+        //     setIsLoading(false);
+        //   });
+      });
   };
 
   return (
@@ -107,18 +143,18 @@ function Home() {
           <div>
             <div className="flex items-center justify-center w-full">
               <label
-                htmlFor="Logo"
+                htmlFor="Images"
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
-                {Logo && (
+                {Images && (
                   <div className="absolute w-full h-full p-5">
                     <img
                       className="object-contain w-full h-full"
-                      src={toAbsolutePath(Logo)}
+                      src={toAbsolutePath(Images)}
                     />
                   </div>
                 )}
-                {!Logo && (
+                {!Images && (
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
                       className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
@@ -142,11 +178,11 @@ function Home() {
                 )}
 
                 <Controller
-                  name="Logo"
+                  name="Images"
                   control={control}
                   render={({ field }) => (
                     <input
-                      id="Logo"
+                      id="Images"
                       type="file"
                       className="hidden"
                       //{...field}
@@ -161,21 +197,21 @@ function Home() {
               </label>
             </div>
           </div>
-          <div>
+          {/* <div>
             <div className="flex items-center justify-center w-full">
               <label
-                htmlFor="Background"
+                htmlFor="Icon"
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
-                {Background && (
+                {Icon && (
                   <div className="absolute w-full h-full">
                     <img
                       className="object-contain w-full h-full"
-                      src={toAbsolutePath(Background)}
+                      src={toAbsolutePath(Icon)}
                     />
                   </div>
                 )}
-                {!Background && (
+                {!Icon && (
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
                       className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
@@ -199,11 +235,11 @@ function Home() {
                 )}
 
                 <Controller
-                  name="Background"
+                  name="Icon"
                   control={control}
                   render={({ field }) => (
                     <input
-                      id="Background"
+                      id="Icon"
                       type="file"
                       className="hidden"
                       //{...field}
@@ -217,7 +253,7 @@ function Home() {
                 />
               </label>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="mb-5">
           <div className="text-[12px] text-[#939393] mb-1 font-light">
@@ -321,7 +357,55 @@ function Home() {
               />
             </div>
           </div>
-          <div className="flex">
+          <div className="flex mb-2">
+            <div className="flex-1">
+              <Controller
+                name="Slogan.SubTitle"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                    type="text"
+                    placeholder="Nhập text"
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[50px] mx-2">
+              <Controller
+                name="Slogan.SubTitleFontSize"
+                control={control}
+                render={({ field }) => (
+                  <NumericFormat
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
+                    type="text"
+                    placeholder="Nhập cỡ chữ"
+                    value={field.value}
+                    onValueChange={({ floatValue }) =>
+                      field.onChange(floatValue)
+                    }
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[46px]">
+              <Controller
+                name="Slogan.SubTitleColor"
+                control={control}
+                render={({ field }) => (
+                  <ColorPicker
+                    value={field.value}
+                    inputType="input"
+                    onChange={field.onChange}
+                    fullWidth
+                    className="picker-color"
+                  />
+                )}
+              />
+            </div>
+          </div>
+          <div className="flex mb-2">
             <div className="flex-1">
               <Controller
                 name="Slogan.Value"
@@ -369,10 +453,58 @@ function Home() {
               />
             </div>
           </div>
+          <div className="flex">
+            <div className="flex-1">
+              <Controller
+                name="Copyright.Value"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                    type="text"
+                    placeholder="Nhập text"
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[50px] mx-2">
+              <Controller
+                name="Copyright.FontSize"
+                control={control}
+                render={({ field }) => (
+                  <NumericFormat
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
+                    type="text"
+                    placeholder="Nhập cỡ chữ"
+                    value={field.value}
+                    onValueChange={({ floatValue }) =>
+                      field.onChange(floatValue)
+                    }
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[46px]">
+              <Controller
+                name="Copyright.Color"
+                control={control}
+                render={({ field }) => (
+                  <ColorPicker
+                    value={field.value}
+                    inputType="input"
+                    onChange={field.onChange}
+                    fullWidth
+                    className="picker-color"
+                  />
+                )}
+              />
+            </div>
+          </div>
         </div>
         <div>
           <div className="text-[12px] text-[#939393] mb-1 font-light">
-            Tiêu đề Button / Màu nền / Màu chữ / Màu Line
+            Tiêu đề Button / Màu nền / Màu chữ / Cỡ chữ
           </div>
           <div className="flex">
             <div className="flex-1">
@@ -421,15 +553,16 @@ function Home() {
             </div>
             <div className="w-[46px] ml-2">
               <Controller
-                name="Button.LineColor"
+                name="Button.FontSize"
                 control={control}
                 render={({ field }) => (
-                  <ColorPicker
+                  <NumericFormat
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
+                    type="text"
                     value={field.value}
-                    inputType="input"
-                    onChange={field.onChange}
-                    fullWidth
-                    className="picker-color"
+                    onValueChange={({ floatValue }) =>
+                      field.onChange(floatValue)
+                    }
                   />
                 )}
               />
@@ -439,92 +572,105 @@ function Home() {
       </div>
       <div className="flex flex-col flex-1 h-full w-full md:w-[calc(100%-300px)] lg:w-[calc(100%-400px)] md:order-last order-first">
         <div
-          className="md:flex items-center justify-center grow md:overflow-auto font-alegreya relative"
+          className="md:flex items-center justify-center grow md:overflow-auto relative"
           ref={elRef}
         >
           <div
             ref={componentRef}
-            className="relative bg-no-repeat bg-cover"
+            className={`relative bg-no-repeat bg-cover overflow-hidden el-scale font-alegreya`}
             style={{
               width: Width,
               height: Height,
-              backgroundImage: `url(${toAbsolutePath(Background)})`,
-              transform: `scale(${Scale})`,
+              "--el-scale": Scale,
+              background: `${Background}`,
+              //transform: `scale(${Scale})`,
               transformOrigin: "0 0",
             }}
           >
-            <div
-              className="absolute h-full w-[200px] top-0 left-[30px]"
-              style={{
-                background: "rgb(249 247 220 / 70%)",
-              }}
-            >
+            <style>
+              @import
+              url(`https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300;400;500;700;800&family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800&family=Ephesis&display=swap`);
+            </style>
+            <div className="absolute top-[18%] left-[8%] z-10">
               <div
-                className={clsx(
-                  `border-b p-6 flex flex-col justify-center items-center`
-                )}
+                className="capitalize font-medium mb-12"
                 style={{
-                  borderColor: Color,
+                  color: Title.Color,
+                  fontSize: Number(Title.FontSize || 30) + "px",
+                  lineHeight: Number(Title.FontSize || 30) + 5 + "px",
                 }}
               >
-                <div className="py-8">
-                  <img className="w-[50px]" src={toAbsolutePath(Logo)} />
-                </div>
-                <div
-                  className={clsx(`text-center uppercase font-medium`)}
-                  style={{
-                    color: Title.Color,
-                    fontSize: Number(Title.FontSize || 30) + "px",
-                    lineHeight: Number(Title.FontSize || 30) + 5 + "px",
-                  }}
-                >
-                  <div>{Title.Value}</div>
-                </div>
+                <div>{Title.Value}</div>
               </div>
-              <div className={clsx(`p-6 text-center`)}>
+              <div
+                className="font-ephesis"
+                style={{
+                  fontSize: (Slogan.SubFontSize || 50) + "px",
+                  color: Slogan.SubColor,
+                  lineHeight: "42px",
+                }}
+              >
+                {Slogan.Sub}
+              </div>
+              <div
+                className="font-medium italic"
+                style={{
+                  color: Slogan.SubTitleColor,
+                  fontSize: Number(Slogan.SubTitleFontSize || 70) + "px",
+                  lineHeight: "55px",
+                }}
+              >
+                <div>{Slogan.SubTitle}</div>
+              </div>
+              <button
+                className="font-medium rounded-xl px-5 py-2 mt-20"
+                style={{
+                  background: Button.BackgroundColor,
+                  color: Button.Color,
+                  fontSize: Button.FontSize,
+                }}
+              >
+                {Button.Title}
+              </button>
+            </div>
+            <div className="absolute right-[9%] top-2/4 -translate-y-2/4 rounded-[60px] w-[280px] h-[75%]">
+              <img
+                className="w-full h-full object-cover rounded-[60px]"
+                src={toAbsolutePath(Images)}
+                alt="Anh"
+              />
+              <div
+                className="absolute z-20 w-[100px] h-[100px] rounded-full flex justify-center items-center text-center -left-[18%] bottom-[23%]"
+                style={{
+                  background: Slogan.Background,
+                }}
+              >
                 <div
-                  className="uppercase"
+                  className="font-medium"
                   style={{
-                    fontSize: (Slogan.SubFontSize || 20) + "px",
-                    color: Slogan.SubColor,
-                  }}
-                >
-                  {Slogan.Sub}
-                </div>
-                <div
-                  className="mt-5 font-medium"
-                  style={{
-                    fontSize: (Slogan.FontSize || 70) + "px",
-                    lineHeight: (Slogan.FontSize || 70) + "px",
+                    fontSize: (Slogan.FontSize || 32) + "px",
                     color: Slogan.Color,
+                    lineHeight: "32px",
                   }}
                 >
                   {Slogan.Value}
                 </div>
               </div>
             </div>
+            <div className="absolute -right-[20%] -bottom-[15%] w-[260px]">
+              <img className="w-full" src={toAbsolutePath(Icon)} alt="Anh" />
+            </div>
+            <div className="absolute top-0 left-2/4 -translate-x-2/4 w-[115px]">
+              <img className="w-full" src={toAbsolutePath(Icon)} alt="Anh" />
+            </div>
             <div
-              className={clsx(
-                `absolute w-full flex justify-center bottom-[60px]`
-              )}
+              className="absolute bottom-[15%] left-[8%] font-medium"
+              style={{
+                color: Copyright.Color,
+                fontSize: Copyright.FontSize,
+              }}
             >
-              <div
-                className="absolute top-2/4 w-[calc(100%-30px)] h-[1px] left-[30px]"
-                style={{
-                  background: Button.LineColor,
-                }}
-              ></div>
-              <div
-                className={clsx(
-                  `text-white relative z-10 rounded-[30px] px-4 ml-[30px] h-[32px] flex items-center justify-center`
-                )}
-                style={{
-                  background: Button.BackgroundColor,
-                  color: Button.Color,
-                }}
-              >
-                {Button.Title}
-              </div>
+              {Copyright.Value}
             </div>
           </div>
           <button
@@ -593,4 +739,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Template2;

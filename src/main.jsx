@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./app/App";
 import Home from "./pages/Home";
+import Template2 from "./pages/Template2";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/thietke/source/index.html/2",
-        element: <div>Template 2</div>,
+        element: <Template2 />,
       },
       {
         path: "1",
