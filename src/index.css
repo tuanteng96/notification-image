@@ -30,6 +30,12 @@ body {
     bottom: 75%;
 }
 
+.picker-color-left .colorSquare~div {
+    left: 0;
+    top: auto;
+    bottom: 75%;
+}
+
 .picker-color .chrome-picker {
     @apply !font-sans
 }

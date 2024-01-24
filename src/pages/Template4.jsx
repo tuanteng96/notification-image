@@ -114,10 +114,10 @@ function Template4() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-grow md:h-full flex-col md:flex-row h-full"
+      className="flex flex-col flex-grow h-full overflow-auto md:h-full md:flex-row"
     >
       <div className="w-full md:w-[300px] md:min-w-[300px] lg:w-[400px] lg:min-w-[400px] p-5 bg-white h-full md:overflow-auto order-last md:order-first">
-        <div className="grid grid-cols-4 md:grid-cols-2 gap-5 mb-5">
+        <div className="grid grid-cols-4 gap-5 mb-5 md:grid-cols-2">
           <div>
             <div className="flex items-center justify-center w-full">
               <label
@@ -125,7 +125,7 @@ function Template4() {
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
                 {Images && (
-                  <div className="absolute w-full h-full md:p-5 p-2">
+                  <div className="absolute w-full h-full p-2 md:p-5">
                     <img
                       className="object-contain w-full h-full"
                       src={toAbsolutePath(Images)}
@@ -472,7 +472,7 @@ function Template4() {
       </div>
       <div className="flex flex-col flex-1 h-full w-full md:w-[calc(100%-300px)] lg:w-[calc(100%-400px)] md:order-last order-first">
         <div
-          className="md:flex items-center justify-center grow overflow-hidden md:overflow-auto relative"
+          className="relative items-center justify-center overflow-hidden md:flex grow md:overflow-auto aspect-square"
           ref={elRef}
         >
           <div
@@ -616,7 +616,7 @@ function Template4() {
                 {Title.Value}
               </div>
               <div
-                className="font-alegreya font-medium"
+                className="font-medium font-alegreya"
                 style={{
                   color: Slogan.SubColor,
                   fontSize: Slogan.SubFontSize,
@@ -648,9 +648,9 @@ function Template4() {
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-0 w-full flex justify-between items-center px-10 pb-8">
+            <div className="absolute bottom-0 flex items-center justify-between w-full px-10 pb-8">
               <div
-                className="font-medium w-full text-center"
+                className="w-full font-medium text-center"
                 style={{
                   color: Copyright.Color,
                   fontSize: Number(Copyright.FontSize || 30) + "px",
@@ -662,7 +662,7 @@ function Template4() {
           </div>
           <button
             type="button"
-            className="bg-danger text-white fixed top-2 right-2 h-11 w-11 rounded-full flex items-center justify-center disabled:opacity-75 md:hidden"
+            className="fixed flex items-center justify-center text-white rounded-full bg-danger top-2 right-2 h-11 w-11 disabled:opacity-75 md:hidden"
             onClick={() => {
               window?.parent?.postMessage(
                 JSON.stringify({
@@ -676,7 +676,7 @@ function Template4() {
           </button>
           <button
             type="button"
-            className="bg-primary text-white fixed top-16 right-2 h-11 w-11 rounded-full flex items-center justify-center disabled:opacity-75 md:hidden"
+            className="fixed flex items-center justify-center text-white rounded-full bg-primary top-16 right-2 h-11 w-11 disabled:opacity-75 md:hidden"
             onClick={onExportImage}
             disabled={isLoading}
           >
@@ -708,7 +708,7 @@ function Template4() {
             )}
           </button>
         </div>
-        <div className="hidden md:flex justify-between px-4 py-3 bg-white border-l">
+        <div className="justify-between hidden px-4 py-3 bg-white border-l md:flex">
           <div></div>
           <div>
             <button

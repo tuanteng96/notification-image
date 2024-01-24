@@ -125,10 +125,10 @@ function Template5() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-grow md:h-full flex-col md:flex-row h-full"
+      className="flex flex-col flex-grow h-full overflow-auto md:h-full md:flex-row"
     >
       <div className="w-full md:w-[300px] md:min-w-[300px] lg:w-[400px] lg:min-w-[400px] p-5 bg-white h-full md:overflow-auto order-last md:order-first">
-        <div className="grid grid-cols-4 md:grid-cols-2 md:gap-5 gap-3 mb-5">
+        <div className="grid grid-cols-4 gap-3 mb-5 md:grid-cols-2 md:gap-5">
           <div>
             <div className="flex items-center justify-center w-full">
               <label
@@ -136,7 +136,7 @@ function Template5() {
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
                 {Images1 && (
-                  <div className="absolute w-full h-full md:p-5 p-3">
+                  <div className="absolute w-full h-full p-3 md:p-5">
                     <img
                       className="object-contain w-full h-full"
                       src={toAbsolutePath(Images1)}
@@ -193,7 +193,7 @@ function Template5() {
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
                 {Images2 && (
-                  <div className="absolute w-full h-full md:p-5 p-3">
+                  <div className="absolute w-full h-full p-3 md:p-5">
                     <img
                       className="object-contain w-full h-full"
                       src={toAbsolutePath(Images2)}
@@ -250,7 +250,7 @@ function Template5() {
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
                 {Images3 && (
-                  <div className="absolute w-full h-full md:p-5 p-3">
+                  <div className="absolute w-full h-full p-3 md:p-5">
                     <img
                       className="object-contain w-full h-full"
                       src={toAbsolutePath(Images3)}
@@ -307,7 +307,7 @@ function Template5() {
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
                 {Images4 && (
-                  <div className="absolute w-full h-full md:p-5 p-3">
+                  <div className="absolute w-full h-full p-3 md:p-5">
                     <img
                       className="object-contain w-full h-full"
                       src={toAbsolutePath(Images4)}
@@ -364,7 +364,7 @@ function Template5() {
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
                 {Images5 && (
-                  <div className="absolute w-full h-full md:p-5 p-3">
+                  <div className="absolute w-full h-full p-3 md:p-5">
                     <img
                       className="object-contain w-full h-full"
                       src={toAbsolutePath(Images5)}
@@ -421,7 +421,7 @@ function Template5() {
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
                 {Images6 && (
-                  <div className="absolute w-full h-full md:p-5 p-3">
+                  <div className="absolute w-full h-full p-3 md:p-5">
                     <img
                       className="object-contain w-full h-full"
                       src={toAbsolutePath(Images6)}
@@ -663,7 +663,7 @@ function Template5() {
       </div>
       <div className="flex flex-col flex-1 h-full w-full md:w-[calc(100%-300px)] lg:w-[calc(100%-400px)] md:order-last order-first bg-[#ebecf0]">
         <div
-          className="md:flex items-center justify-center grow overflow-hidden md:overflow-auto relative"
+          className="relative items-center justify-center overflow-hidden md:flex grow md:overflow-auto aspect-square"
           ref={elRef}
         >
           <div
@@ -695,9 +695,9 @@ function Template5() {
               <img className="w-[170px]" src={toAbsolutePath(Icon)} />
             </div>
             <div className="pt-16">
-              <div className="text-center relative">
+              <div className="relative text-center">
                 <div
-                  className="uppercase font-medium font-play"
+                  className="font-medium uppercase font-play"
                   style={{
                     color: Title.Color,
                     fontSize: Title.FontSize,
@@ -716,7 +716,7 @@ function Template5() {
                   {Slogan.Value}
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-5 px-20 mt-10 relative">
+              <div className="relative grid grid-cols-3 gap-5 px-20 mt-10">
                 <div className="w-[40px] absolute -top-12 left-16">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -756,7 +756,7 @@ function Template5() {
                   }}
                 >
                   <img
-                    className="w-full h-full object-cover"
+                    className="object-cover w-full h-full"
                     src={toAbsolutePath(Images1)}
                   />
                 </div>
@@ -767,7 +767,7 @@ function Template5() {
                   }}
                 >
                   <img
-                    className="w-full h-full object-cover"
+                    className="object-cover w-full h-full"
                     src={toAbsolutePath(Images2)}
                   />
                 </div>
@@ -778,7 +778,7 @@ function Template5() {
                   }}
                 >
                   <img
-                    className="w-full h-full object-cover"
+                    className="object-cover w-full h-full"
                     src={toAbsolutePath(Images3)}
                   />
                 </div>
@@ -817,7 +817,7 @@ function Template5() {
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-0 w-full flex justify-between items-center px-10 pb-8">
+            <div className="absolute bottom-0 flex items-center justify-between w-full px-10 pb-8">
               <div
                 className="w-full text-center"
                 style={{
@@ -831,7 +831,7 @@ function Template5() {
           </div>
           <button
             type="button"
-            className="bg-danger text-white fixed top-2 right-2 h-11 w-11 rounded-full flex items-center justify-center disabled:opacity-75 md:hidden"
+            className="fixed flex items-center justify-center text-white rounded-full bg-danger top-2 right-2 h-11 w-11 disabled:opacity-75 md:hidden"
             onClick={() => {
               window?.parent?.postMessage(
                 JSON.stringify({
@@ -845,7 +845,7 @@ function Template5() {
           </button>
           <button
             type="button"
-            className="bg-primary text-white fixed top-16 right-2 h-11 w-11 rounded-full flex items-center justify-center disabled:opacity-75 md:hidden"
+            className="fixed flex items-center justify-center text-white rounded-full bg-primary top-16 right-2 h-11 w-11 disabled:opacity-75 md:hidden"
             onClick={onExportImage}
             disabled={isLoading}
           >
@@ -877,7 +877,7 @@ function Template5() {
             )}
           </button>
         </div>
-        <div className="hidden md:flex justify-between px-4 py-3 bg-white border-l">
+        <div className="justify-between hidden px-4 py-3 bg-white border-l md:flex">
           <div></div>
           <div>
             <button

@@ -106,10 +106,10 @@ function Template6() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-grow md:h-full flex-col md:flex-row h-full"
+      className="flex flex-col flex-grow h-full overflow-auto md:h-full md:flex-row"
     >
       <div className="w-full md:w-[300px] md:min-w-[300px] lg:w-[400px] lg:min-w-[400px] p-5 bg-white h-full md:overflow-auto order-last md:order-first">
-        <div className="grid grid-cols-4 md:grid-cols-2 gap-5 mb-5">
+        <div className="grid grid-cols-4 gap-5 mb-5 md:grid-cols-2">
           <div>
             <div className="flex items-center justify-center w-full">
               <label
@@ -464,7 +464,7 @@ function Template6() {
       </div>
       <div className="flex flex-col flex-1 h-full w-full md:w-[calc(100%-300px)] lg:w-[calc(100%-400px)] md:order-last order-first">
         <div
-          className="md:flex items-center justify-center grow overflow-hidden md:overflow-auto relative"
+          className="relative items-center justify-center overflow-hidden md:flex grow md:overflow-auto aspect-square"
           ref={elRef}
         >
           <div
@@ -479,10 +479,10 @@ function Template6() {
               transformOrigin: "0 0",
             }}
           >
-            <div className="pt-8 h-full flex flex-col">
+            <div className="flex flex-col h-full pt-8">
               <div className="text-center">
                 <div
-                  className="font-play uppercase"
+                  className="uppercase font-play"
                   style={{
                     color: Title.Color,
                     fontSize: Title.FontSize,
@@ -492,7 +492,7 @@ function Template6() {
                   {Title.Value}
                 </div>
                 <div
-                  className="font-play font-medium"
+                  className="font-medium font-play"
                   style={{
                     color: Slogan.SubColor,
                     fontSize: Slogan.SubFontSize,
@@ -501,9 +501,9 @@ function Template6() {
                   {Slogan.Sub}
                 </div>
               </div>
-              <div className="grow px-20 pb-24 pt-5 relative">
+              <div className="relative px-20 pt-5 pb-24 grow">
                 <div
-                  className="h-full relative"
+                  className="relative h-full"
                   style={{
                     background: Color,
                   }}
@@ -511,7 +511,7 @@ function Template6() {
                   <div className="absolute w-full text-center top-3.5">
                     <div className="absolute w-[500px] h-[1.5px] bg-white -left-[300px] top-8"></div>
                     <span
-                      className="text-white font-alegreya relative z-10 px-16"
+                      className="relative z-10 px-16 text-white font-alegreya"
                       style={{
                         background: Color,
                         fontSize: Slogan.SubTitleFontSize,
@@ -528,7 +528,7 @@ function Template6() {
                   >
                     <div className="absolute w-[500px] h-[1.5px] bg-white -right-[300px] top-8"></div>
                     <span
-                      className="text-white font-alegreya relative z-10 px-16"
+                      className="relative z-10 px-16 text-white font-alegreya"
                       style={{
                         background: Color,
                         fontSize: Slogan.SubTitleFontSize,
@@ -540,7 +540,7 @@ function Template6() {
                 </div>
                 <div className="absolute bottom-16 left-0 w-[76%] h-[70%]">
                   <img
-                    className="h-full w-full object-cover"
+                    className="object-cover w-full h-full"
                     src={toAbsolutePath(Images)}
                   />
                   <div className="w-[130px] absolute -bottom-10 left-12">
@@ -581,7 +581,7 @@ function Template6() {
                       </g>
                     </svg>
                     <div
-                      className="absolute w-full h-full top-0 left-0 flex justify-center items-center font-play text-center font-medium"
+                      className="absolute top-0 left-0 flex items-center justify-center w-full h-full font-medium text-center font-play"
                       style={{
                         fontSize: Slogan.FontSize,
                         color: Slogan.SubTitleColor,
@@ -619,7 +619,7 @@ function Template6() {
           </div>
           <button
             type="button"
-            className="bg-danger text-white fixed top-2 right-2 h-11 w-11 rounded-full flex items-center justify-center disabled:opacity-75 md:hidden"
+            className="fixed flex items-center justify-center text-white rounded-full bg-danger top-2 right-2 h-11 w-11 disabled:opacity-75 md:hidden"
             onClick={() => {
               window?.parent?.postMessage(
                 JSON.stringify({
@@ -633,7 +633,7 @@ function Template6() {
           </button>
           <button
             type="button"
-            className="bg-primary text-white fixed top-16 right-2 h-11 w-11 rounded-full flex items-center justify-center disabled:opacity-75 md:hidden"
+            className="fixed flex items-center justify-center text-white rounded-full bg-primary top-16 right-2 h-11 w-11 disabled:opacity-75 md:hidden"
             onClick={onExportImage}
             disabled={isLoading}
           >
@@ -665,7 +665,7 @@ function Template6() {
             )}
           </button>
         </div>
-        <div className="hidden md:flex justify-between px-4 py-3 bg-white border-l">
+        <div className="justify-between hidden px-4 py-3 bg-white border-l md:flex">
           <div></div>
           <div>
             <button
