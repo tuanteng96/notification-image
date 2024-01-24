@@ -4,9 +4,9 @@ import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
-import html2canvas from "html2canvas";
 import axios from "axios";
 import { toAbsolutePath } from "../helpers/assetPath";
+import * as htmlToImage from "html-to-image";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -68,33 +68,43 @@ function Home() {
 
   const onExportImage = async () => {
     setIsLoading(true);
-    const canvas = await html2canvas(componentRef.current);
-    const image = canvas.toDataURL("image/png", 1.0);
-    var bodyFormData = new FormData();
-    bodyFormData.append("title", "mau-1-" + new Date().valueOf());
-    bodyFormData.append("base64", image);
-    console.log(image);
-    // axios
-    //   .post(
-    //     `${
-    //       import.meta.env.DEV ? "https://cser.vn" : ""
-    //     }/api/v3/file?cmd=base64`,
-    //     bodyFormData,
-    //     {
-    //       headers: { Authorization: `Bearer ${getTokenParams()}` },
-    //     }
-    //   )
-    //   .then(({ data, error }) => {
-    //     if (!error) {
-    //       window?.parent?.postMessage(
-    //         JSON.stringify({
-    //           Image: data?.src || "",
-    //         }),
-    //         "*"
-    //       );
-    //     }
-    //     setIsLoading(false);
-    //   });
+    componentRef?.current?.classList.remove("el-scale"); 
+
+    htmlToImage
+      .toPng(componentRef.current, {
+        canvasWidth: 600,
+        canvasHeight: 600,
+        pixelRatio: 1,
+        skipAutoScale: true,
+        cacheBust: true,
+      })
+      .then(function (image) {
+        componentRef?.current?.classList.add("el-scale");
+        var bodyFormData = new FormData();
+        bodyFormData.append("title", "mau-1-" + new Date().valueOf());
+        bodyFormData.append("base64", image);
+        axios
+          .post(
+            `${
+              import.meta.env.DEV ? "https://cser.vn" : ""
+            }/api/v3/file?cmd=base64`,
+            bodyFormData,
+            {
+              headers: { Authorization: `Bearer ${getTokenParams()}` },
+            }
+          )
+          .then(({ data, error }) => {
+            if (!error) {
+              window?.parent?.postMessage(
+                JSON.stringify({
+                  Image: data?.src || "",
+                }),
+                "*"
+              );
+            }
+            setIsLoading(false);
+          });
+      });
   };
 
   return (
@@ -111,7 +121,7 @@ function Home() {
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
                 {Logo && (
-                  <div className="absolute w-full h-full p-5">
+                  <div className="absolute w-full h-full md:p-5 p-2">
                     <img
                       className="object-contain w-full h-full"
                       src={toAbsolutePath(Logo)}
@@ -444,12 +454,13 @@ function Home() {
         >
           <div
             ref={componentRef}
-            className="relative bg-no-repeat bg-cover"
+            className="relative bg-no-repeat bg-cover el-scale"
             style={{
               width: Width,
               height: Height,
               backgroundImage: `url(${toAbsolutePath(Background)})`,
-              transform: `scale(${Scale})`,
+              "--el-scale": Scale,
+              //transform: `scale(${Scale})`,
               transformOrigin: "0 0",
             }}
           >

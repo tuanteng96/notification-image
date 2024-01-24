@@ -6,6 +6,10 @@ import "./index.css";
 import App from "./app/App";
 import Home from "./pages/Home";
 import Template2 from "./pages/Template2";
+import Template3 from "./pages/Template3";
+import Template4 from "./pages/Template4";
+import Template5 from "./pages/Template5";
+import Template6 from "./pages/Template6";
 
 const router = createBrowserRouter([
   {
@@ -21,12 +25,20 @@ const router = createBrowserRouter([
         element: <Template2 />,
       },
       {
-        path: "1",
-        element: <Home />,
+        path: "/thietke/source/index.html/3",
+        element: <Template3 />,
       },
       {
-        path: "2",
-        element: <div>2</div>,
+        path: "/thietke/source/index.html/4",
+        element: <Template4 />,
+      },
+      {
+        path: "/thietke/source/index.html/5",
+        element: <Template5 />,
+      },
+      {
+        path: "/thietke/source/index.html/6",
+        element: <Template6 />,
       },
     ],
   },
