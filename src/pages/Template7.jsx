@@ -7,33 +7,34 @@ import { NumericFormat } from "react-number-format";
 import axios from "axios";
 import { toAbsolutePath } from "../helpers/assetPath";
 import * as htmlToImage from "html-to-image";
+import ReactCurvedText from "react-curved-text";
 
-function Home() {
+function Template7() {
   const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
-      Title: {
-        Value: "Beauty Treatment",
-        FontSize: 30,
-        Color: "#763c00",
+      Voucher: {
+        Value: "VOUCHER CODE",
+        FontSize: 35,
+        Color: "#524028",
       },
       Slogan: {
-        Sub: "Big Promotion.",
-        SubColor: "#763c00",
-        SubFontSize: 20,
-        Value: "30% OFF",
-        FontSize: 70,
+        Value: "Disc 50% off for this voucher code",
+        FontSize: 22,
         Color: "#763c00",
       },
       Button: {
-        LineColor: "#763c00",
-        BackgroundColor: "#763c00",
-        Title: "Book Now",
-        Color: "#ffffff",
+        BackgroundColor: "#EFDFD3",
+        Title: "CODE50",
+        Color: "#524028",
+        FontSize: 20,
       },
       Color: "#763c00",
-      Logo: "/Thietke/myimage/logo-1.png",
-      Background: "/Thietke/myimage/bg-1.png",
+      Images: "/Thietke/myimage/anh-7.jpg",
+      Background: "/Thietke/myimage/bg-7.png",
+      Icon: "/Thietke/myimage/icon-7.png",
+      Icon1: "/Thietke/myimage/icon-7-1.png",
+      Icon2: "/Thietke/myimage/icon-7-2.png",
       Width: 600,
       Height: 600,
     },
@@ -46,8 +47,18 @@ function Home() {
   const componentRef = useRef();
   const elRef = useRef();
 
-  const { Title, Color, Logo, Background, Button, Slogan, Width, Height } =
-    watch();
+  const {
+    Voucher,
+    Images,
+    Background,
+    Button,
+    Slogan,
+    Width,
+    Height,
+    Icon,
+    Icon1,
+    Icon2,
+  } = watch();
 
   useEffect(() => {
     if (elRef && elRef?.current) {
@@ -68,7 +79,7 @@ function Home() {
 
   const onExportImage = async () => {
     setIsLoading(true);
-    componentRef?.current?.classList.remove("el-scale"); 
+    componentRef?.current?.classList.remove("el-scale");
 
     htmlToImage
       .toPng(componentRef.current, {
@@ -81,7 +92,7 @@ function Home() {
       .then(function (image) {
         componentRef?.current?.classList.add("el-scale");
         var bodyFormData = new FormData();
-        bodyFormData.append("title", "mau-1-" + new Date().valueOf());
+        bodyFormData.append("title", "mau-7-" + new Date().valueOf());
         bodyFormData.append("base64", image);
         axios
           .post(
@@ -117,18 +128,18 @@ function Home() {
           <div>
             <div className="flex items-center justify-center w-full">
               <label
-                htmlFor="Logo"
+                htmlFor="Images"
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
-                {Logo && (
+                {Images && (
                   <div className="absolute w-full h-full p-2 md:p-5">
                     <img
                       className="object-contain w-full h-full"
-                      src={toAbsolutePath(Logo)}
+                      src={toAbsolutePath(Images)}
                     />
                   </div>
                 )}
-                {!Logo && (
+                {!Images && (
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
                       className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
@@ -152,74 +163,11 @@ function Home() {
                 )}
 
                 <Controller
-                  name="Logo"
+                  name="Images"
                   control={control}
                   render={({ field }) => (
                     <input
-                      id="Logo"
-                      type="file"
-                      className="hidden"
-                      //{...field}
-                      onChange={(e) => {
-                        var file = e.target.files[0];
-                        let reader = new FileReader();
-                        reader.readAsDataURL(file);
-                        reader.onload = function () {
-                          field.onChange(reader.result);
-                        };
-                        reader.onerror = function (error) {
-                          console.log("Error: ", error);
-                        };
-                      }}
-                    />
-                  )}
-                />
-              </label>
-            </div>
-          </div>
-          <div>
-            <div className="flex items-center justify-center w-full">
-              <label
-                htmlFor="Background"
-                className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
-              >
-                {Background && (
-                  <div className="absolute w-full h-full">
-                    <img
-                      className="object-contain w-full h-full"
-                      src={toAbsolutePath(Background)}
-                    />
-                  </div>
-                )}
-                {!Background && (
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <svg
-                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 20 16"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                      />
-                    </svg>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      SVG, PNG, JPG
-                    </p>
-                  </div>
-                )}
-
-                <Controller
-                  name="Background"
-                  control={control}
-                  render={({ field }) => (
-                    <input
-                      id="Background"
+                      id="Images"
                       type="file"
                       className="hidden"
                       //{...field}
@@ -248,7 +196,7 @@ function Home() {
           <div className="flex mb-2">
             <div className="flex-1">
               <Controller
-                name="Title.Value"
+                name="Voucher.Value"
                 control={control}
                 render={({ field }) => (
                   <input
@@ -262,7 +210,7 @@ function Home() {
             </div>
             <div className="w-[50px] mx-2">
               <Controller
-                name="Title.FontSize"
+                name="Voucher.FontSize"
                 control={control}
                 render={({ field }) => (
                   <NumericFormat
@@ -279,7 +227,7 @@ function Home() {
             </div>
             <div className="w-[46px]">
               <Controller
-                name="Title.Color"
+                name="Voucher.Color"
                 control={control}
                 render={({ field }) => (
                   <>
@@ -291,54 +239,6 @@ function Home() {
                       className="picker-color"
                     />
                   </>
-                )}
-              />
-            </div>
-          </div>
-          <div className="flex mb-2">
-            <div className="flex-1">
-              <Controller
-                name="Slogan.Sub"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                    type="text"
-                    placeholder="Nhập text"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[50px] mx-2">
-              <Controller
-                name="Slogan.SubFontSize"
-                control={control}
-                render={({ field }) => (
-                  <NumericFormat
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
-                    type="text"
-                    placeholder="Nhập cỡ chữ"
-                    value={field.value}
-                    onValueChange={({ floatValue }) =>
-                      field.onChange(floatValue)
-                    }
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px]">
-              <Controller
-                name="Slogan.SubColor"
-                control={control}
-                render={({ field }) => (
-                  <ColorPicker
-                    value={field.value}
-                    inputType="input"
-                    onChange={field.onChange}
-                    fullWidth
-                    className="picker-color"
-                  />
                 )}
               />
             </div>
@@ -394,7 +294,7 @@ function Home() {
         </div>
         <div>
           <div className="text-[12px] text-[#939393] mb-1 font-light">
-            Tiêu đề Button / Màu nền / Màu chữ / Màu Line
+            Tiêu đề Button / Màu nền / Màu chữ
           </div>
           <div className="flex">
             <div className="flex-1">
@@ -441,21 +341,6 @@ function Home() {
                 )}
               />
             </div>
-            <div className="w-[46px] ml-2">
-              <Controller
-                name="Button.LineColor"
-                control={control}
-                render={({ field }) => (
-                  <ColorPicker
-                    value={field.value}
-                    inputType="input"
-                    onChange={field.onChange}
-                    fullWidth
-                    className="picker-color"
-                  />
-                )}
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -476,77 +361,62 @@ function Home() {
               transformOrigin: "0 0",
             }}
           >
-            <div
-              className="absolute h-full w-[200px] top-0 left-[30px]"
-              style={{
-                background: "rgb(249 247 220 / 70%)",
-              }}
-            >
-              <div
-                className={clsx(
-                  `border-b p-6 flex flex-col justify-center items-center`
-                )}
-                style={{
-                  borderColor: Color,
-                }}
-              >
-                <div className="py-8">
-                  <img className="w-[50px]" src={toAbsolutePath(Logo)} />
-                </div>
-                <div
-                  className={clsx(`text-center uppercase font-medium`)}
-                  style={{
-                    color: Title.Color,
-                    fontSize: Number(Title.FontSize || 30) + "px",
-                    lineHeight: Number(Title.FontSize || 30) + 5 + "px",
-                  }}
-                >
-                  <div>{Title.Value}</div>
+            <div>
+              <div className="w-[380px] m-auto pt-16">
+                <div className="relative">
+                  <div className="w-full rounded-t-[200px] overflow-hidden border-2 border-[#94744B]">
+                    <img
+                      className="w-full h-[280px] object-cover"
+                      src={toAbsolutePath(Images)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="absolute w-[80px] z-10 -right-[5%] top-[20%]">
+                    <img src={toAbsolutePath(Icon)} alt="" />
+                  </div>
                 </div>
               </div>
-              <div className={clsx(`p-6 text-center`)}>
-                <div
-                  className="uppercase"
-                  style={{
-                    fontSize: (Slogan.SubFontSize || 20) + "px",
-                    color: Slogan.SubColor,
-                  }}
-                >
-                  {Slogan.Sub}
+              <div className="bg-[#F4EFEA] border-[#524028] border w-[80%] mx-auto rounded-xl -mt-6 relative">
+                <div className="pb-6 pt-8 font-gentium">
+                  <div
+                    className="text-center font-bold mb-6 leading-7 tracking-[10px]"
+                    style={{
+                      color: Voucher.Color,
+                      fontSize: Voucher.FontSize + "px",
+                    }}
+                  >
+                    {Voucher.Value}
+                  </div>
+                  <div className="flex justify-center">
+                    <div
+                      className="inline-block min-w-[150px] text-center p-2 rounded-xl text-[20px] tracking-[3px] font-bold"
+                      style={{
+                        color: Button.Color,
+                        background: Button.BackgroundColor,
+                        fontSize: Button.FontSize + "px",
+                      }}
+                    >
+                      {Button.Title}
+                    </div>
+                  </div>
                 </div>
-                <div
-                  className="mt-5 font-medium"
-                  style={{
-                    fontSize: (Slogan.FontSize || 70) + "px",
-                    lineHeight: (Slogan.FontSize || 70) + "px",
-                    color: Slogan.Color,
-                  }}
-                >
-                  {Slogan.Value}
+                <div className="border-t border-[#524028] py-5">
+                  <div
+                    className="w-[40%] text-center m-auto leading-[25px] font-light"
+                    style={{
+                      fontSize: Slogan.FontSize + "px",
+                      color: Slogan.Color,
+                    }}
+                  >
+                    {Slogan.Value}
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div
-              className={clsx(
-                `absolute w-full flex justify-center bottom-[60px]`
-              )}
-            >
-              <div
-                className="absolute top-2/4 w-[calc(100%-30px)] h-[1px] left-[30px]"
-                style={{
-                  background: Button.LineColor,
-                }}
-              ></div>
-              <div
-                className={clsx(
-                  `text-white relative z-10 rounded-[30px] px-4 ml-[30px] h-[32px] flex items-center justify-center`
-                )}
-                style={{
-                  background: Button.BackgroundColor,
-                  color: Button.Color,
-                }}
-              >
-                {Button.Title}
+                <div className="absolute w-[60px] top-[7px] -right-[31px]">
+                  <img src={toAbsolutePath(Icon1)} alt="" />
+                </div>
+                <div className="absolute w-[60px] bottom-[10px] -left-[31px]">
+                  <img src={toAbsolutePath(Icon2)} alt="" />
+                </div>
               </div>
             </div>
           </div>
@@ -616,4 +486,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Template7;

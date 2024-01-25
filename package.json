@@ -17,6 +17,7 @@
         "html-to-image": "^1.11.11",
         "react": "^18.2.0",
         "react-color": "^2.19.3",
+        "react-curved-text": "^3.0.0",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.49.2",
         "react-input-color": "^4.0.1",

@@ -161,8 +161,14 @@ function Template3() {
                       //{...field}
                       onChange={(e) => {
                         var file = e.target.files[0];
-                        const objectUrl = URL.createObjectURL(file);
-                        field.onChange(objectUrl);
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
                       }}
                     />
                   )}

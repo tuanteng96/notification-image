@@ -177,8 +177,14 @@ function Template5() {
                       //{...field}
                       onChange={(e) => {
                         var file = e.target.files[0];
-                        const objectUrl = URL.createObjectURL(file);
-                        field.onChange(objectUrl);
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
                       }}
                     />
                   )}
@@ -234,8 +240,14 @@ function Template5() {
                       //{...field}
                       onChange={(e) => {
                         var file = e.target.files[0];
-                        const objectUrl = URL.createObjectURL(file);
-                        field.onChange(objectUrl);
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
                       }}
                     />
                   )}
@@ -291,8 +303,14 @@ function Template5() {
                       //{...field}
                       onChange={(e) => {
                         var file = e.target.files[0];
-                        const objectUrl = URL.createObjectURL(file);
-                        field.onChange(objectUrl);
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
                       }}
                     />
                   )}
@@ -348,8 +366,14 @@ function Template5() {
                       //{...field}
                       onChange={(e) => {
                         var file = e.target.files[0];
-                        const objectUrl = URL.createObjectURL(file);
-                        field.onChange(objectUrl);
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
                       }}
                     />
                   )}
@@ -405,8 +429,14 @@ function Template5() {
                       //{...field}
                       onChange={(e) => {
                         var file = e.target.files[0];
-                        const objectUrl = URL.createObjectURL(file);
-                        field.onChange(objectUrl);
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
                       }}
                     />
                   )}
@@ -417,7 +447,7 @@ function Template5() {
           <div>
             <div className="flex items-center justify-center w-full">
               <label
-                htmlFor="Images5"
+                htmlFor="Images6"
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
                 {Images6 && (
@@ -462,8 +492,14 @@ function Template5() {
                       //{...field}
                       onChange={(e) => {
                         var file = e.target.files[0];
-                        const objectUrl = URL.createObjectURL(file);
-                        field.onChange(objectUrl);
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
                       }}
                     />
                   )}
@@ -487,7 +523,7 @@ function Template5() {
                     inputType="input"
                     onChange={field.onChange}
                     fullWidth
-                    className="picker-color"
+                    className="picker-color picker-color-left"
                   />
                 )}
               />
@@ -502,7 +538,7 @@ function Template5() {
                     inputType="input"
                     onChange={field.onChange}
                     fullWidth
-                    className="picker-color"
+                    className="picker-color picker-color-left"
                   />
                 )}
               />

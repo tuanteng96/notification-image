@@ -21,11 +21,11 @@ function Template6() {
         SubColor: "#221616",
         SubFontSize: 20,
         SubTitle: "special offer",
-        SubTitleColor: "#221616",
+        SubTitleColor: "#fff",
         SubTitleFontSize: 32,
         Value: "50% Off",
         FontSize: 40,
-        Color: "#fff",
+        Color: "#221616",
       },
       Images: "/Thietke/myimage/anh-6.png",
       Background: "#DDB69E",
@@ -158,8 +158,14 @@ function Template6() {
                       //{...field}
                       onChange={(e) => {
                         var file = e.target.files[0];
-                        const objectUrl = URL.createObjectURL(file);
-                        field.onChange(objectUrl);
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
                       }}
                     />
                   )}
@@ -240,7 +246,7 @@ function Template6() {
                     inputType="input"
                     onChange={field.onChange}
                     fullWidth
-                    className="picker-color"
+                    className="picker-color picker-color-left"
                   />
                 )}
               />
@@ -255,7 +261,7 @@ function Template6() {
                     inputType="input"
                     onChange={field.onChange}
                     fullWidth
-                    className="picker-color"
+                    className="picker-color picker-color-left"
                   />
                 )}
               />
@@ -511,10 +517,11 @@ function Template6() {
                   <div className="absolute w-full text-center top-3.5">
                     <div className="absolute w-[500px] h-[1.5px] bg-white -left-[300px] top-8"></div>
                     <span
-                      className="relative z-10 px-16 text-white font-alegreya"
+                      className="relative z-10 px-16 font-alegreya"
                       style={{
                         background: Color,
                         fontSize: Slogan.SubTitleFontSize,
+                        color: Slogan.SubTitleColor,
                       }}
                     >
                       {Slogan.SubTitle}
@@ -528,10 +535,11 @@ function Template6() {
                   >
                     <div className="absolute w-[500px] h-[1.5px] bg-white -right-[300px] top-8"></div>
                     <span
-                      className="relative z-10 px-16 text-white font-alegreya"
+                      className="relative z-10 px-16 font-alegreya"
                       style={{
                         background: Color,
                         fontSize: Slogan.SubTitleFontSize,
+                        color: Slogan.SubTitleColor,
                       }}
                     >
                       {Slogan.SubTitle}
@@ -584,7 +592,7 @@ function Template6() {
                       className="absolute top-0 left-0 flex items-center justify-center w-full h-full font-medium text-center font-play"
                       style={{
                         fontSize: Slogan.FontSize,
-                        color: Slogan.SubTitleColor,
+                        color: Slogan.Color,
                         lineHeight: "40px",
                       }}
                     >

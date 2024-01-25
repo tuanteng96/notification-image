@@ -166,8 +166,14 @@ function Template4() {
                       //{...field}
                       onChange={(e) => {
                         var file = e.target.files[0];
-                        const objectUrl = URL.createObjectURL(file);
-                        field.onChange(objectUrl);
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
                       }}
                     />
                   )}
@@ -248,7 +254,7 @@ function Template4() {
                     inputType="input"
                     onChange={field.onChange}
                     fullWidth
-                    className="picker-color"
+                    className="picker-color picker-color-left"
                   />
                 )}
               />
@@ -263,7 +269,7 @@ function Template4() {
                     inputType="input"
                     onChange={field.onChange}
                     fullWidth
-                    className="picker-color"
+                    className="picker-color picker-color-left"
                   />
                 )}
               />
