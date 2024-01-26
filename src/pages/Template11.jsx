@@ -401,7 +401,7 @@ function Template11() {
       </div>
       <div className="flex flex-col flex-1 h-full w-full md:w-[calc(100%-300px)] lg:w-[calc(100%-400px)] md:order-last order-first">
         <div
-          className="relative items-center justify-center md:flex grow md:overflow-auto font-alegreya aspect-square"
+          className="relative items-center justify-center overflow-hidden md:flex grow md:overflow-auto font-alegreya aspect-square"
           ref={elRef}
         >
           <div
@@ -416,7 +416,7 @@ function Template11() {
               transformOrigin: "0 0",
             }}
           >
-            <div className="h-full py-14 px-12">
+            <div className="h-full px-12 py-14">
               <div className="font-georama">
                 <div
                   className="text-center tracking-[4px] uppercase"

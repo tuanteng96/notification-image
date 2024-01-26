@@ -362,7 +362,7 @@ function Template7() {
       </div>
       <div className="flex flex-col flex-1 h-full w-full md:w-[calc(100%-300px)] lg:w-[calc(100%-400px)] md:order-last order-first">
         <div
-          className="relative items-center justify-center md:flex grow md:overflow-auto font-alegreya aspect-square"
+          className="relative items-center justify-center overflow-hidden md:flex grow md:overflow-auto font-alegreya aspect-square"
           ref={elRef}
         >
           <div
@@ -393,7 +393,7 @@ function Template7() {
                 </div>
               </div>
               <div className="bg-[#F4EFEA] border-[#524028] border w-[80%] mx-auto rounded-xl -mt-6 relative">
-                <div className="pb-6 pt-8 font-gentium">
+                <div className="pt-8 pb-6 font-gentium">
                   <div
                     className="text-center font-bold mb-6 leading-7 tracking-[10px]"
                     style={{

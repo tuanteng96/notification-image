@@ -8,33 +8,23 @@ import axios from "axios";
 import { toAbsolutePath } from "../helpers/assetPath";
 import * as htmlToImage from "html-to-image";
 
-function Template10() {
+function Template13() {
   const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
-      Title: {
-        Value: "natural skincare",
-        FontSize: 30,
-        Color: "#594946",
-      },
-      Slogan: {
-        Value: "www.reallygreatsite.com",
-        FontSize: 18,
-        Color: "#594946",
-      },
       Before: {
         Title: "Before",
-        FontSize: 26,
-        Color: "#594946",
+        FontSize: 30,
+        Color: "#5E301C",
       },
       After: {
         Title: "After",
-        FontSize: 26,
-        Color: "#594946",
+        FontSize: 30,
+        Color: "#5E301C",
       },
-      Images: "/Thietke/myimage/anh-10-1.png",
-      Images2: "/Thietke/myimage/anh-10-2.png",
-      Background: "/Thietke/myimage/bg-10.png",
+      Images: "/Thietke/myimage/anh-13-1.png",
+      Images2: "/Thietke/myimage/anh-13-2.png",
+      Background: "/Thietke/myimage/bg-13.png",
       Width: 600,
       Height: 600,
     },
@@ -57,6 +47,7 @@ function Template10() {
     Images2,
     Before,
     After,
+    Copyright,
   } = watch();
 
   useEffect(() => {
@@ -258,104 +249,6 @@ function Template10() {
           <div className="flex mb-2">
             <div className="flex-1">
               <Controller
-                name="Title.Value"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                    type="text"
-                    placeholder="Nhập text"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[50px] mx-2">
-              <Controller
-                name="Title.FontSize"
-                control={control}
-                render={({ field }) => (
-                  <NumericFormat
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
-                    type="text"
-                    placeholder="Nhập text"
-                    value={field.value}
-                    onValueChange={({ floatValue }) =>
-                      field.onChange(floatValue)
-                    }
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px]">
-              <Controller
-                name="Title.Color"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <ColorPicker
-                      value={field.value}
-                      inputType="input"
-                      onChange={field.onChange}
-                      fullWidth
-                      className="picker-color"
-                    />
-                  </>
-                )}
-              />
-            </div>
-          </div>
-          <div className="flex mb-2">
-            <div className="flex-1">
-              <Controller
-                name="Slogan.Value"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                    type="text"
-                    placeholder="Nhập text"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[50px] mx-2">
-              <Controller
-                name="Slogan.FontSize"
-                control={control}
-                render={({ field }) => (
-                  <NumericFormat
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
-                    type="text"
-                    placeholder="Nhập cỡ chữ"
-                    value={field.value}
-                    onValueChange={({ floatValue }) =>
-                      field.onChange(floatValue)
-                    }
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px]">
-              <Controller
-                name="Slogan.Color"
-                control={control}
-                render={({ field }) => (
-                  <ColorPicker
-                    value={field.value}
-                    inputType="input"
-                    onChange={field.onChange}
-                    fullWidth
-                    className="picker-color"
-                  />
-                )}
-              />
-            </div>
-          </div>
-          <div className="flex mb-2">
-            <div className="flex-1">
-              <Controller
                 name="Before.Title"
                 control={control}
                 render={({ field }) => (
@@ -468,64 +361,46 @@ function Template10() {
               transformOrigin: "0 0",
             }}
           >
-            <div className="h-full px-12 pt-16">
-              <div className="bg-[#fff] border-[#000000] border w-[90%] mx-auto rounded-[50px] relative pt-6 pb-4 px-8">
+            <div className="flex flex-col h-full py-16">
+              <div className="relative flex items-center">
+                <div className="flex-1 h-[2px] bg-[#905941] mt-1"></div>
                 <div
-                  className="text-center tracking-[4px] uppercase leading-10"
+                  className="pl-5 pr-24 font-bold uppercase font-play"
                   style={{
-                    color: Title.Color,
-                    fontSize: Title.FontSize + "px",
+                    fontSize: Before.FontSize + "px",
+                    color: Before.Color,
                   }}
                 >
-                  {Title.Value}
-                </div>
-                <div
-                  className="w-[40%] text-center m-auto leading-[25px] font-light"
-                  style={{
-                    fontSize: Slogan.FontSize + "px",
-                    color: Slogan.Color,
-                  }}
-                >
-                  {Slogan.Value}
+                  {Before.Title}
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-6 mt-5">
-                <div>
-                  <div
-                    className="text-center font-ephesis"
-                    style={{
-                      fontSize: Before.FontSize + "px",
-                      color: Before.Color,
-                    }}
-                  >
-                    {Before.Title}
-                  </div>
-                  <div className="border-white border-[5px]">
-                    <img
-                      className="w-full h-[330px] object-cover"
-                      src={toAbsolutePath(Images)}
-                      alt=""
-                    />
-                  </div>
+              <div className="grid grid-cols-1 gap-2 px-24 py-2 grow">
+                <div className="py-2 overflow-hidden">
+                  <img
+                    className="object-cover w-full h-full border border-[#919191] rounded-[100px]"
+                    src={toAbsolutePath(Images)}
+                    alt=""
+                  />
                 </div>
-                <div>
-                  <div
-                    className="text-center font-ephesis"
-                    style={{
-                      fontSize: After.FontSize + "px",
-                      color: After.Color,
-                    }}
-                  >
-                    {After.Title}
-                  </div>
-                  <div className="border-white border-[5px]">
-                    <img
-                      className="w-full h-[330px] object-cover"
-                      src={toAbsolutePath(Images2)}
-                      alt=""
-                    />
-                  </div>
+                <div className="py-2 overflow-hidden">
+                  <img
+                    className="object-cover w-full h-full border border-[#919191] rounded-[100px]"
+                    src={toAbsolutePath(Images2)}
+                    alt=""
+                  />
                 </div>
+              </div>
+              <div className="relative flex items-center">
+                <div
+                  className="pl-24 pr-5 font-bold uppercase font-play"
+                  style={{
+                    fontSize: After.FontSize + "px",
+                    color: After.Color,
+                  }}
+                >
+                  {After.Title}
+                </div>
+                <div className="flex-1 h-[2px] bg-[#905941] mt-1"></div>
               </div>
             </div>
           </div>
@@ -595,4 +470,4 @@ function Template10() {
   );
 }
 
-export default Template10;
+export default Template13;

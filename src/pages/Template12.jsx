@@ -1,5 +1,6 @@
 ﻿import { ArrowDownTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { ColorPicker } from "@wellbees/color-picker-input";
+import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
@@ -7,50 +8,38 @@ import axios from "axios";
 import { toAbsolutePath } from "../helpers/assetPath";
 import * as htmlToImage from "html-to-image";
 
-function Template8() {
+function Template12() {
   const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
-      Code: {
-        Title: "Use Code :",
-        TitleFontSize: 18,
-        TitleColor: "#392E2C",
-        Value: "Gift100",
-        FontSize: 18,
-        Color: "#392E2C",
-      },
-      Voucher: {
-        Title: "Gift Voucher",
-        TitleFontSize: 55,
-        TitleColor: "#DF7861",
-        Text: "$100",
-        TextFontSize: 65,
-        TextColor: "#fff",
-        Value: "Just For You",
+      Title: {
+        Value: "Eyelash",
         FontSize: 30,
-        Color: "#392E2C",
+        Color: "#5E301C",
       },
       Slogan: {
-        Value: "Valid Until June 2025",
-        FontSize: 18,
-        Color: "#392E2C",
+        Value: "extension",
+        FontSize: 65,
+        Color: "#B4583C",
+      },
+      Before: {
+        Title: "Before",
+        FontSize: 22,
+        Color: "#5E301C",
+      },
+      After: {
+        Title: "After",
+        FontSize: 22,
+        Color: "#5E301C",
       },
       Copyright: {
         Value: "www.reallygreatsite.com",
         FontSize: 18,
-        Color: "#392E2C",
+        Color: "#44342A",
       },
-      Button: {
-        BackgroundColor: "#392E2C",
-        Title: "Shop Now",
-        Color: "#fff",
-        FontSize: 24,
-      },
-      Color: "#763c00",
-      Images: "/Thietke/myimage/anh-7.jpg",
-      Background: "/Thietke/myimage/bg-8.png",
-      Icon: "/Thietke/myimage/voucher-8.png",
-      Icon1: "/Thietke/myimage/icon-8.png",
+      Images: "/Thietke/myimage/anh-12-1.jpeg",
+      Images2: "/Thietke/myimage/anh-12-2.png",
+      Background: "/Thietke/myimage/bg-12.png",
       Width: 600,
       Height: 600,
     },
@@ -64,17 +53,16 @@ function Template8() {
   const elRef = useRef();
 
   const {
-    Voucher,
+    Title,
     Images,
     Background,
-    Button,
     Slogan,
     Width,
     Height,
-    Icon,
-    Icon1,
+    Images2,
+    Before,
+    After,
     Copyright,
-    Code,
   } = watch();
 
   useEffect(() => {
@@ -109,7 +97,7 @@ function Template8() {
       .then(function (image) {
         componentRef?.current?.classList.add("el-scale");
         var bodyFormData = new FormData();
-        bodyFormData.append("title", "mau-8-" + new Date().valueOf());
+        bodyFormData.append("title", "mau-10-" + new Date().valueOf());
         bodyFormData.append("base64", image);
         axios
           .post(
@@ -141,7 +129,7 @@ function Template8() {
       className="flex flex-col flex-grow h-full overflow-auto md:h-full md:flex-row"
     >
       <div className="w-full md:w-[300px] md:min-w-[300px] lg:w-[400px] lg:min-w-[400px] p-5 bg-white h-full md:overflow-auto order-last md:order-first">
-        {/* <div className="grid grid-cols-4 gap-5 mb-5 md:grid-cols-2">
+        <div className="grid grid-cols-4 gap-5 mb-5 md:grid-cols-2">
           <div>
             <div className="flex items-center justify-center w-full">
               <label
@@ -205,15 +193,78 @@ function Template8() {
               </label>
             </div>
           </div>
-        </div> */}
-        <div className="mb-5">
+          <div>
+            <div className="flex items-center justify-center w-full">
+              <label
+                htmlFor="Images2"
+                className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
+              >
+                {Images2 && (
+                  <div className="absolute w-full h-full p-2 md:p-5">
+                    <img
+                      className="object-contain w-full h-full"
+                      src={toAbsolutePath(Images2)}
+                    />
+                  </div>
+                )}
+                {!Images2 && (
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      SVG, PNG, JPG
+                    </p>
+                  </div>
+                )}
+
+                <Controller
+                  name="Images2"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      id="Images2"
+                      type="file"
+                      className="hidden"
+                      //{...field}
+                      onChange={(e) => {
+                        var file = e.target.files[0];
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
+                      }}
+                    />
+                  )}
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+        <div>
           <div className="text-[12px] text-[#939393] mb-1 font-light">
             Nhập tiêu đề / Cỡ chữ / Màu sắc
           </div>
           <div className="flex mb-2">
             <div className="flex-1">
               <Controller
-                name="Voucher.Value"
+                name="Title.Value"
                 control={control}
                 render={({ field }) => (
                   <input
@@ -227,7 +278,7 @@ function Template8() {
             </div>
             <div className="w-[50px] mx-2">
               <Controller
-                name="Voucher.FontSize"
+                name="Title.FontSize"
                 control={control}
                 render={({ field }) => (
                   <NumericFormat
@@ -244,207 +295,7 @@ function Template8() {
             </div>
             <div className="w-[46px]">
               <Controller
-                name="Voucher.Color"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <ColorPicker
-                      value={field.value}
-                      inputType="input"
-                      onChange={field.onChange}
-                      fullWidth
-                      className="picker-color"
-                    />
-                  </>
-                )}
-              />
-            </div>
-          </div>
-          <div className="flex mb-2">
-            <div className="flex-1">
-              <Controller
-                name="Voucher.Title"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                    type="text"
-                    placeholder="Nhập text"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[50px] mx-2">
-              <Controller
-                name="Voucher.TitleFontSize"
-                control={control}
-                render={({ field }) => (
-                  <NumericFormat
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
-                    type="text"
-                    placeholder="Nhập text"
-                    value={field.value}
-                    onValueChange={({ floatValue }) =>
-                      field.onChange(floatValue)
-                    }
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px]">
-              <Controller
-                name="Voucher.TitleColor"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <ColorPicker
-                      value={field.value}
-                      inputType="input"
-                      onChange={field.onChange}
-                      fullWidth
-                      className="picker-color"
-                    />
-                  </>
-                )}
-              />
-            </div>
-          </div>
-          <div className="flex mb-2">
-            <div className="flex-1">
-              <Controller
-                name="Voucher.Text"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                    type="text"
-                    placeholder="Nhập text"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[50px] mx-2">
-              <Controller
-                name="Voucher.TextFontSize"
-                control={control}
-                render={({ field }) => (
-                  <NumericFormat
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
-                    type="text"
-                    placeholder="Nhập text"
-                    value={field.value}
-                    onValueChange={({ floatValue }) =>
-                      field.onChange(floatValue)
-                    }
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px]">
-              <Controller
-                name="Voucher.TextColor"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <ColorPicker
-                      value={field.value}
-                      inputType="input"
-                      onChange={field.onChange}
-                      fullWidth
-                      className="picker-color"
-                    />
-                  </>
-                )}
-              />
-            </div>
-          </div>
-          <div className="flex mb-2">
-            <div className="flex-1">
-              <Controller
-                name="Code.Title"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                    type="text"
-                    placeholder="Nhập text"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[50px] mx-2">
-              <Controller
-                name="Code.TitleFontSize"
-                control={control}
-                render={({ field }) => (
-                  <NumericFormat
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
-                    type="text"
-                    placeholder="Nhập text"
-                    value={field.value}
-                    onValueChange={({ floatValue }) =>
-                      field.onChange(floatValue)
-                    }
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px]">
-              <Controller
-                name="Code.TitleColor"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <ColorPicker
-                      value={field.value}
-                      inputType="input"
-                      onChange={field.onChange}
-                      fullWidth
-                      className="picker-color"
-                    />
-                  </>
-                )}
-              />
-            </div>
-          </div>
-          <div className="flex mb-2">
-            <div className="flex-1">
-              <Controller
-                name="Code.Value"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                    type="text"
-                    placeholder="Nhập text"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[50px] mx-2">
-              <Controller
-                name="Code.FontSize"
-                control={control}
-                render={({ field }) => (
-                  <NumericFormat
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
-                    type="text"
-                    placeholder="Nhập text"
-                    value={field.value}
-                    onValueChange={({ floatValue }) =>
-                      field.onChange(floatValue)
-                    }
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px]">
-              <Controller
-                name="Code.Color"
+                name="Title.Color"
                 control={control}
                 render={({ field }) => (
                   <>
@@ -508,6 +359,102 @@ function Template8() {
               />
             </div>
           </div>
+          <div className="flex mb-2">
+            <div className="flex-1">
+              <Controller
+                name="Before.Title"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                    type="text"
+                    placeholder="Nhập text"
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[50px] mx-2">
+              <Controller
+                name="Before.FontSize"
+                control={control}
+                render={({ field }) => (
+                  <NumericFormat
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
+                    type="text"
+                    placeholder="Nhập cỡ chữ"
+                    value={field.value}
+                    onValueChange={({ floatValue }) =>
+                      field.onChange(floatValue)
+                    }
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[46px]">
+              <Controller
+                name="Before.Color"
+                control={control}
+                render={({ field }) => (
+                  <ColorPicker
+                    value={field.value}
+                    inputType="input"
+                    onChange={field.onChange}
+                    fullWidth
+                    className="picker-color"
+                  />
+                )}
+              />
+            </div>
+          </div>
+          <div className="flex mb-2">
+            <div className="flex-1">
+              <Controller
+                name="After.Title"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                    type="text"
+                    placeholder="Nhập text"
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[50px] mx-2">
+              <Controller
+                name="After.FontSize"
+                control={control}
+                render={({ field }) => (
+                  <NumericFormat
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
+                    type="text"
+                    placeholder="Nhập cỡ chữ"
+                    value={field.value}
+                    onValueChange={({ floatValue }) =>
+                      field.onChange(floatValue)
+                    }
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[46px]">
+              <Controller
+                name="After.Color"
+                control={control}
+                render={({ field }) => (
+                  <ColorPicker
+                    value={field.value}
+                    inputType="input"
+                    onChange={field.onChange}
+                    fullWidth
+                    className="picker-color"
+                  />
+                )}
+              />
+            </div>
+          </div>
           <div className="flex">
             <div className="flex-1">
               <Controller
@@ -557,74 +504,6 @@ function Template8() {
             </div>
           </div>
         </div>
-        <div>
-          <div className="text-[12px] text-[#939393] mb-1 font-light">
-            Tiêu đề Button / Màu nền / Màu chữ / Cỡ chữ
-          </div>
-          <div className="flex">
-            <div className="flex-1">
-              <Controller
-                name="Button.Title"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                    type="text"
-                    placeholder="Nhập text"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px] ml-2">
-              <Controller
-                name="Button.BackgroundColor"
-                control={control}
-                render={({ field }) => (
-                  <ColorPicker
-                    value={field.value}
-                    inputType="input"
-                    onChange={field.onChange}
-                    fullWidth
-                    className="picker-color"
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px] ml-2">
-              <Controller
-                name="Button.Color"
-                control={control}
-                render={({ field }) => (
-                  <ColorPicker
-                    value={field.value}
-                    inputType="input"
-                    onChange={field.onChange}
-                    fullWidth
-                    className="picker-color"
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[50px] mx-2">
-              <Controller
-                name="Button.FontSize"
-                control={control}
-                render={({ field }) => (
-                  <NumericFormat
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
-                    type="text"
-                    placeholder="Nhập cỡ chữ"
-                    value={field.value}
-                    onValueChange={({ floatValue }) =>
-                      field.onChange(floatValue)
-                    }
-                  />
-                )}
-              />
-            </div>
-          </div>
-        </div>
       </div>
       <div className="flex flex-col flex-1 h-full w-full md:w-[calc(100%-300px)] lg:w-[calc(100%-400px)] md:order-last order-first">
         <div
@@ -643,91 +522,74 @@ function Template8() {
               transformOrigin: "0 0",
             }}
           >
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-              <div className="absolute top-2/4 -translate-y-2/4 -left-[130px]">
-                <img className="w-[380px]" src={toAbsolutePath(Icon1)} alt="" />
-              </div>
-            </div>
-            <div className="absolute top-0 right-0 w-2/4 h-full pt-20 font-gentium">
-              <div className="mb-8">
+            <div className="h-full px-20 pt-16">
+              <div>
                 <div
-                  className="font-bold leading-[30px]"
+                  className="text-center tracking-[4px] uppercase leading-10 font-gentium"
                   style={{
-                    color: Voucher.Color,
-                    fontSize: Voucher.FontSize,
+                    color: Title.Color,
+                    fontSize: Title.FontSize + "px",
                   }}
                 >
-                  {Voucher.Value}
+                  {Title.Value}
                 </div>
                 <div
-                  className="font-ephesis leading-[90px]"
+                  className="w-[40%] text-center m-auto leading-[50px] font-ephesis"
                   style={{
-                    color: Voucher.TitleColor,
-                    fontSize: Voucher.TitleFontSize + "px",
-                  }}
-                >
-                  {Voucher.Title}
-                </div>
-              </div>
-              <div className="relative inline-block">
-                <img className="w-[230px]" src={toAbsolutePath(Icon)} alt="" />
-                <div
-                  className="absolute font-bold top-0 right-0 font-gentium leading-[70px] w-[80%] h-full flex justify-center items-center"
-                  style={{
-                    color: Voucher.TextColor,
-                    fontSize: Voucher.TextFontSize + "px",
-                  }}
-                >
-                  {Voucher.Text}
-                </div>
-              </div>
-              <div className="mt-3 mb-14">
-                <div>
-                  <span
-                    style={{
-                      color: Code.TitleColor,
-                      fontSize: Code.TitleFontSize,
-                    }}
-                  >
-                    {Code.Title}
-                  </span>
-                  <span
-                    className="pl-2 font-bold"
-                    style={{
-                      color: Code.Color,
-                      fontSize: Code.FontSize,
-                    }}
-                  >
-                    {Code.Value}
-                  </span>
-                </div>
-                <div
-                  style={{
-                    color: Slogan.Color,
                     fontSize: Slogan.FontSize + "px",
+                    color: Slogan.Color,
                   }}
                 >
                   {Slogan.Value}
                 </div>
               </div>
-              <div
-                className="inline-block font-bold rounded-lg py-1.5 px-3 min-w-[180px] text-center"
-                style={{
-                  color: Button.Color,
-                  background: Button.BackgroundColor,
-                  fontSize: Button.FontSize + "px",
-                }}
-              >
-                {Button.Title}
+              <div className="grid grid-cols-2 gap-6 mt-10">
+                <div>
+                  <div
+                    className="mb-1 font-light text-center uppercase"
+                    style={{
+                      fontSize: Before.FontSize + "px",
+                      color: Before.Color,
+                    }}
+                  >
+                    {Before.Title}
+                  </div>
+                  <div className="overflow-hidden rounded-tl-[25px] rounded-br-[25px] aspect-square">
+                    <img
+                      className="object-cover w-full h-full"
+                      src={toAbsolutePath(Images)}
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div className="pt-20">
+                  <div className="overflow-hidden rounded-tl-[25px] rounded-br-[25px] aspect-square">
+                    <img
+                      className="object-cover w-full h-full"
+                      src={toAbsolutePath(Images2)}
+                      alt=""
+                    />
+                  </div>
+                  <div
+                    className="mt-1 font-light text-center uppercase"
+                    style={{
+                      fontSize: After.FontSize + "px",
+                      color: After.Color,
+                    }}
+                  >
+                    {After.Title}
+                  </div>
+                </div>
               </div>
-              <div
-                className="mt-5"
-                style={{
-                  color: Copyright.Color,
-                  fontSize: Copyright.FontSize,
-                }}
-              >
-                {Copyright.Value}
+              <div className="flex justify-center pt-10">
+                <div
+                  style={{
+                    color: Copyright.Color,
+                    fontSize: Copyright.FontSize + "px",
+                  }}
+                >
+                  {Copyright.Value}
+                </div>
               </div>
             </div>
           </div>
@@ -797,4 +659,4 @@ function Template8() {
   );
 }
 
-export default Template8;
+export default Template12;

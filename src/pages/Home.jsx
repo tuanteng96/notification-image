@@ -461,7 +461,7 @@ function Home() {
       </div>
       <div className="flex flex-col flex-1 h-full w-full md:w-[calc(100%-300px)] lg:w-[calc(100%-400px)] md:order-last order-first">
         <div
-          className="relative items-center justify-center md:flex grow md:overflow-auto font-alegreya aspect-square"
+          className="relative items-center justify-center overflow-hidden md:flex grow md:overflow-auto font-alegreya aspect-square"
           ref={elRef}
         >
           <div

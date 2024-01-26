@@ -494,7 +494,7 @@ function Template9() {
       </div>
       <div className="flex flex-col flex-1 h-full w-full md:w-[calc(100%-300px)] lg:w-[calc(100%-400px)] md:order-last order-first">
         <div
-          className="relative items-center justify-center md:flex grow md:overflow-auto aspect-square"
+          className="relative items-center justify-center overflow-hidden md:flex grow md:overflow-auto aspect-square"
           ref={elRef}
         >
           <div
@@ -520,7 +520,7 @@ function Template9() {
                 {Copyright.Value}
               </div>
             </div>
-            <div className="w-full h-full flex items-center justify-center font-play">
+            <div className="flex items-center justify-center w-full h-full font-play">
               <div className="relative">
                 <img className="w-[420px]" src={toAbsolutePath(Icon)} alt="" />
                 <div className="absolute w-full h-full top-0 left-0 px-3.5 py-2 flex flex-col">
@@ -536,7 +536,7 @@ function Template9() {
                     </div>
                   </div>
                   <div className="grow border-t-[2px] border-b-[2px] border-[#f1e0c3] px-2 flex">
-                    <div className="px-3 py-2 flex-1 h-full">
+                    <div className="flex-1 h-full px-3 py-2">
                       <div
                         className="font-gentium leading-[70px] flex justify-center items-center h-full border-r-[2px] border-[#f1e0c3]"
                         style={{
@@ -547,7 +547,7 @@ function Template9() {
                         {Voucher.Text}
                       </div>
                     </div>
-                    <div className="px-5 flex items-center justify-center flex-col">
+                    <div className="flex flex-col items-center justify-center px-5">
                       <div
                         style={{
                           color: Code.TitleColor,
