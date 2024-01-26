@@ -8,32 +8,33 @@ import axios from "axios";
 import { toAbsolutePath } from "../helpers/assetPath";
 import * as htmlToImage from "html-to-image";
 
-function Template7() {
+function Template10() {
   const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
-      Voucher: {
-        Value: "VOUCHER CODE",
-        FontSize: 35,
-        Color: "#524028",
+      Title: {
+        Value: "natural skincare",
+        FontSize: 30,
+        Color: "#594946",
       },
       Slogan: {
-        Value: "Disc 50% off for this voucher code",
-        FontSize: 22,
-        Color: "#763c00",
+        Value: "www.reallygreatsite.com",
+        FontSize: 18,
+        Color: "#594946",
       },
-      Button: {
-        BackgroundColor: "#EFDFD3",
-        Title: "CODE50",
-        Color: "#524028",
-        FontSize: 20,
+      Before: {
+        Title: "Before",
+        FontSize: 26,
+        Color: "#594946",
       },
-      Color: "#763c00",
-      Images: "/Thietke/myimage/anh-7.jpg",
-      Background: "/Thietke/myimage/bg-7.png",
-      Icon: "/Thietke/myimage/icon-7.png",
-      Icon1: "/Thietke/myimage/icon-7-1.png",
-      Icon2: "/Thietke/myimage/icon-7-2.png",
+      After: {
+        Title: "After",
+        FontSize: 26,
+        Color: "#594946",
+      },
+      Images: "/Thietke/myimage/anh-10-1.png",
+      Images2: "/Thietke/myimage/anh-10-2.png",
+      Background: "/Thietke/myimage/bg-10.png",
       Width: 600,
       Height: 600,
     },
@@ -47,16 +48,15 @@ function Template7() {
   const elRef = useRef();
 
   const {
-    Voucher,
+    Title,
     Images,
     Background,
-    Button,
     Slogan,
     Width,
     Height,
-    Icon,
-    Icon1,
-    Icon2,
+    Images2,
+    Before,
+    After,
   } = watch();
 
   useEffect(() => {
@@ -91,7 +91,7 @@ function Template7() {
       .then(function (image) {
         componentRef?.current?.classList.add("el-scale");
         var bodyFormData = new FormData();
-        bodyFormData.append("title", "mau-7-" + new Date().valueOf());
+        bodyFormData.append("title", "mau-10-" + new Date().valueOf());
         bodyFormData.append("base64", image);
         axios
           .post(
@@ -187,15 +187,78 @@ function Template7() {
               </label>
             </div>
           </div>
+          <div>
+            <div className="flex items-center justify-center w-full">
+              <label
+                htmlFor="Images2"
+                className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
+              >
+                {Images2 && (
+                  <div className="absolute w-full h-full p-2 md:p-5">
+                    <img
+                      className="object-contain w-full h-full"
+                      src={toAbsolutePath(Images2)}
+                    />
+                  </div>
+                )}
+                {!Images2 && (
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      SVG, PNG, JPG
+                    </p>
+                  </div>
+                )}
+
+                <Controller
+                  name="Images2"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      id="Images2"
+                      type="file"
+                      className="hidden"
+                      //{...field}
+                      onChange={(e) => {
+                        var file = e.target.files[0];
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
+                      }}
+                    />
+                  )}
+                />
+              </label>
+            </div>
+          </div>
         </div>
-        <div className="mb-5">
+        <div>
           <div className="text-[12px] text-[#939393] mb-1 font-light">
             Nhập tiêu đề / Cỡ chữ / Màu sắc
           </div>
           <div className="flex mb-2">
             <div className="flex-1">
               <Controller
-                name="Voucher.Value"
+                name="Title.Value"
                 control={control}
                 render={({ field }) => (
                   <input
@@ -209,7 +272,7 @@ function Template7() {
             </div>
             <div className="w-[50px] mx-2">
               <Controller
-                name="Voucher.FontSize"
+                name="Title.FontSize"
                 control={control}
                 render={({ field }) => (
                   <NumericFormat
@@ -226,7 +289,7 @@ function Template7() {
             </div>
             <div className="w-[46px]">
               <Controller
-                name="Voucher.Color"
+                name="Title.Color"
                 control={control}
                 render={({ field }) => (
                   <>
@@ -242,7 +305,7 @@ function Template7() {
               />
             </div>
           </div>
-          <div className="flex">
+          <div className="flex mb-2">
             <div className="flex-1">
               <Controller
                 name="Slogan.Value"
@@ -290,15 +353,10 @@ function Template7() {
               />
             </div>
           </div>
-        </div>
-        <div>
-          <div className="text-[12px] text-[#939393] mb-1 font-light">
-            Tiêu đề Button / Màu nền / Màu chữ / Cỡ chữ
-          </div>
-          <div className="flex">
+          <div className="flex mb-2">
             <div className="flex-1">
               <Controller
-                name="Button.Title"
+                name="Before.Title"
                 control={control}
                 render={({ field }) => (
                   <input
@@ -310,39 +368,9 @@ function Template7() {
                 )}
               />
             </div>
-            <div className="w-[46px] ml-2">
-              <Controller
-                name="Button.BackgroundColor"
-                control={control}
-                render={({ field }) => (
-                  <ColorPicker
-                    value={field.value}
-                    inputType="input"
-                    onChange={field.onChange}
-                    fullWidth
-                    className="picker-color"
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px] ml-2">
-              <Controller
-                name="Button.Color"
-                control={control}
-                render={({ field }) => (
-                  <ColorPicker
-                    value={field.value}
-                    inputType="input"
-                    onChange={field.onChange}
-                    fullWidth
-                    className="picker-color"
-                  />
-                )}
-              />
-            </div>
             <div className="w-[50px] mx-2">
               <Controller
-                name="Button.FontSize"
+                name="Before.FontSize"
                 control={control}
                 render={({ field }) => (
                   <NumericFormat
@@ -353,6 +381,69 @@ function Template7() {
                     onValueChange={({ floatValue }) =>
                       field.onChange(floatValue)
                     }
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[46px]">
+              <Controller
+                name="Before.Color"
+                control={control}
+                render={({ field }) => (
+                  <ColorPicker
+                    value={field.value}
+                    inputType="input"
+                    onChange={field.onChange}
+                    fullWidth
+                    className="picker-color"
+                  />
+                )}
+              />
+            </div>
+          </div>
+          <div className="flex">
+            <div className="flex-1">
+              <Controller
+                name="After.Title"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                    type="text"
+                    placeholder="Nhập text"
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[50px] mx-2">
+              <Controller
+                name="After.FontSize"
+                control={control}
+                render={({ field }) => (
+                  <NumericFormat
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
+                    type="text"
+                    placeholder="Nhập cỡ chữ"
+                    value={field.value}
+                    onValueChange={({ floatValue }) =>
+                      field.onChange(floatValue)
+                    }
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[46px]">
+              <Controller
+                name="After.Color"
+                control={control}
+                render={({ field }) => (
+                  <ColorPicker
+                    value={field.value}
+                    inputType="input"
+                    onChange={field.onChange}
+                    fullWidth
+                    className="picker-color"
                   />
                 )}
               />
@@ -377,61 +468,63 @@ function Template7() {
               transformOrigin: "0 0",
             }}
           >
-            <div>
-              <div className="w-[380px] m-auto pt-16">
-                <div className="relative">
-                  <div className="w-full rounded-t-[200px] overflow-hidden border-2 border-[#94744B]">
+            <div className="h-full pt-16 px-12">
+              <div className="bg-[#fff] border-[#000000] border w-[90%] mx-auto rounded-[50px] relative pt-6 pb-4 px-8">
+                <div
+                  className="text-center tracking-[4px] uppercase leading-10"
+                  style={{
+                    color: Title.Color,
+                    fontSize: Title.FontSize + "px",
+                  }}
+                >
+                  {Title.Value}
+                </div>
+                <div
+                  className="w-[40%] text-center m-auto leading-[25px] font-light"
+                  style={{
+                    fontSize: Slogan.FontSize + "px",
+                    color: Slogan.Color,
+                  }}
+                >
+                  {Slogan.Value}
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-6 mt-5">
+                <div>
+                  <div
+                    className="text-center font-ephesis"
+                    style={{
+                      fontSize: Before.FontSize + "px",
+                      color: Before.Color,
+                    }}
+                  >
+                    {Before.Title}
+                  </div>
+                  <div className="border-white border-[5px]">
                     <img
-                      className="w-full h-[280px] object-cover"
+                      className="w-full h-[330px] object-cover"
                       src={toAbsolutePath(Images)}
                       alt=""
                     />
                   </div>
-                  <div className="absolute w-[80px] z-10 -right-[5%] top-[20%]">
-                    <img src={toAbsolutePath(Icon)} alt="" />
-                  </div>
                 </div>
-              </div>
-              <div className="bg-[#F4EFEA] border-[#524028] border w-[80%] mx-auto rounded-xl -mt-6 relative">
-                <div className="pb-6 pt-8 font-gentium">
+                <div>
                   <div
-                    className="text-center font-bold mb-6 leading-7 tracking-[10px]"
+                    className="text-center font-ephesis"
                     style={{
-                      color: Voucher.Color,
-                      fontSize: Voucher.FontSize + "px",
+                      fontSize: After.FontSize + "px",
+                      color: After.Color,
                     }}
                   >
-                    {Voucher.Value}
+                    {After.Title}
                   </div>
-                  <div className="flex justify-center">
-                    <div
-                      className="inline-block min-w-[150px] text-center p-2 rounded-xl tracking-[3px] font-bold"
-                      style={{
-                        color: Button.Color,
-                        background: Button.BackgroundColor,
-                        fontSize: Button.FontSize + "px",
-                      }}
-                    >
-                      {Button.Title}
-                    </div>
+                  <div className="border-white border-[5px]">
+                    <img
+                      className="w-full h-[330px] object-cover"
+                      src={toAbsolutePath(Images2)}
+                      alt=""
+                    />
                   </div>
-                </div>
-                <div className="border-t border-[#524028] py-5">
-                  <div
-                    className="w-[40%] text-center m-auto leading-[25px] font-light"
-                    style={{
-                      fontSize: Slogan.FontSize + "px",
-                      color: Slogan.Color,
-                    }}
-                  >
-                    {Slogan.Value}
-                  </div>
-                </div>
-                <div className="absolute w-[60px] top-[7px] -right-[31px]">
-                  <img src={toAbsolutePath(Icon1)} alt="" />
-                </div>
-                <div className="absolute w-[60px] bottom-[10px] -left-[31px]">
-                  <img src={toAbsolutePath(Icon2)} alt="" />
                 </div>
               </div>
             </div>
@@ -502,4 +595,4 @@ function Template7() {
   );
 }
 
-export default Template7;
+export default Template10;

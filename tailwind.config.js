@@ -16,7 +16,8 @@ export default {
             'alegreya': ['Alegreya Sans', 'system-ui'],
             'ephesis': ['Ephesis', 'system-ui'],
             'play': ['Playfair Display', 'system-ui'],
-            'gentium': ['Gentium Plus']
+            'gentium': ['Gentium Plus'],
+            'georama': ['Georama', 'system-ui']
         }
     },
     plugins: [],
