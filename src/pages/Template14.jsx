@@ -1,6 +1,10 @@
-﻿import { ArrowDownTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
+﻿import {
+  ArrowDownTrayIcon,
+  ShareIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/solid";
+import { HeartIcon } from "@heroicons/react/24/solid";
 import { ColorPicker } from "@wellbees/color-picker-input";
-import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
@@ -8,38 +12,42 @@ import axios from "axios";
 import { toAbsolutePath } from "../helpers/assetPath";
 import * as htmlToImage from "html-to-image";
 
-function Template12() {
+function Template14() {
   const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       Title: {
-        Value: "Eyelash",
-        FontSize: 30,
-        Color: "#5E301C",
+        Value: "feedback",
+        FontSize: 50,
+        Color: "#303030",
       },
       Slogan: {
-        Value: "extension",
-        FontSize: 65,
-        Color: "#B4583C",
+        Value: "Samira Hadid",
+        FontSize: 14,
+        Color: "#303030",
       },
-      Before: {
-        Title: "Before",
-        FontSize: 22,
-        Color: "#5E301C",
+      Desc: {
+        Value:
+          "I'm really pleased with the outcome of the service offered. I don't think you want to miss it!",
+        FontSize: 15,
+        Color: "#555555",
       },
-      After: {
-        Title: "After",
-        FontSize: 22,
-        Color: "#5E301C",
+      User: {
+        Title: "Richard Sanchez",
+        TitleFontSize: 15,
+        TitleColor: "#555555",
+        Value: "CEO Founder",
+        FontSize: 14,
+        Color: "#555555",
       },
       Copyright: {
         Value: "www.reallygreatsite.com",
         FontSize: 18,
-        Color: "#44342A",
+        Color: "#303030",
       },
-      Images: "/Thietke/myimage/anh-12-1.jpeg",
-      Images2: "/Thietke/myimage/anh-12-2.png",
-      Background: "/Thietke/myimage/bg-12.png",
+      Images: "/Thietke/myimage/anh-14.png",
+      User1: "/Thietke/myimage/user-14.png",
+      User2: "/Thietke/myimage/user-14.png",
       Width: 600,
       Height: 600,
     },
@@ -59,9 +67,10 @@ function Template12() {
     Slogan,
     Width,
     Height,
-    Images2,
-    Before,
-    After,
+    Desc,
+    User,
+    User1,
+    User2,
     Copyright,
   } = watch();
 
@@ -97,7 +106,7 @@ function Template12() {
       .then(function (image) {
         componentRef?.current?.classList.add("el-scale");
         var bodyFormData = new FormData();
-        bodyFormData.append("title", "mau-12-" + new Date().valueOf());
+        bodyFormData.append("title", "mau-14-" + new Date().valueOf());
         bodyFormData.append("base64", image);
         axios
           .post(
@@ -129,7 +138,7 @@ function Template12() {
       className="flex flex-col flex-grow h-full overflow-auto md:h-full md:flex-row"
     >
       <div className="w-full md:w-[300px] md:min-w-[300px] lg:w-[400px] lg:min-w-[400px] p-5 bg-white h-full md:overflow-auto order-last md:order-first">
-        <div className="grid grid-cols-4 gap-5 mb-5 md:grid-cols-2">
+        <div className="grid grid-cols-4 gap-5 mb-5 md:grid-cols-3">
           <div>
             <div className="flex items-center justify-center w-full">
               <label
@@ -196,18 +205,18 @@ function Template12() {
           <div>
             <div className="flex items-center justify-center w-full">
               <label
-                htmlFor="Images2"
+                htmlFor="User1"
                 className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
               >
-                {Images2 && (
+                {User1 && (
                   <div className="absolute w-full h-full p-2 md:p-5">
                     <img
                       className="object-contain w-full h-full"
-                      src={toAbsolutePath(Images2)}
+                      src={toAbsolutePath(User1)}
                     />
                   </div>
                 )}
-                {!Images2 && (
+                {!User1 && (
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
                       className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
@@ -231,11 +240,74 @@ function Template12() {
                 )}
 
                 <Controller
-                  name="Images2"
+                  name="User1"
                   control={control}
                   render={({ field }) => (
                     <input
-                      id="Images2"
+                      id="User1"
+                      type="file"
+                      className="hidden"
+                      //{...field}
+                      onChange={(e) => {
+                        var file = e.target.files[0];
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          field.onChange(reader.result);
+                        };
+                        reader.onerror = function (error) {
+                          console.log("Error: ", error);
+                        };
+                      }}
+                    />
+                  )}
+                />
+              </label>
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center justify-center w-full">
+              <label
+                htmlFor="User2"
+                className="relative flex flex-col items-center justify-center w-full h-20 md:h-44 border-[1px] border-gray-300 border-dashed rounded-lg cursor-pointer"
+              >
+                {User2 && (
+                  <div className="absolute w-full h-full p-2 md:p-5">
+                    <img
+                      className="object-contain w-full h-full"
+                      src={toAbsolutePath(User2)}
+                    />
+                  </div>
+                )}
+                {!User2 && (
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      SVG, PNG, JPG
+                    </p>
+                  </div>
+                )}
+
+                <Controller
+                  name="User2"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      id="User2"
                       type="file"
                       className="hidden"
                       //{...field}
@@ -362,7 +434,7 @@ function Template12() {
           <div className="flex mb-2">
             <div className="flex-1">
               <Controller
-                name="Before.Title"
+                name="Desc.Value"
                 control={control}
                 render={({ field }) => (
                   <input
@@ -376,7 +448,7 @@ function Template12() {
             </div>
             <div className="w-[50px] mx-2">
               <Controller
-                name="Before.FontSize"
+                name="Desc.FontSize"
                 control={control}
                 render={({ field }) => (
                   <NumericFormat
@@ -393,7 +465,7 @@ function Template12() {
             </div>
             <div className="w-[46px]">
               <Controller
-                name="Before.Color"
+                name="Desc.Color"
                 control={control}
                 render={({ field }) => (
                   <ColorPicker
@@ -410,7 +482,7 @@ function Template12() {
           <div className="flex mb-2">
             <div className="flex-1">
               <Controller
-                name="After.Title"
+                name="User.Title"
                 control={control}
                 render={({ field }) => (
                   <input
@@ -424,7 +496,7 @@ function Template12() {
             </div>
             <div className="w-[50px] mx-2">
               <Controller
-                name="After.FontSize"
+                name="User.TitleFontSize"
                 control={control}
                 render={({ field }) => (
                   <NumericFormat
@@ -441,7 +513,55 @@ function Template12() {
             </div>
             <div className="w-[46px]">
               <Controller
-                name="After.Color"
+                name="User.TitleColor"
+                control={control}
+                render={({ field }) => (
+                  <ColorPicker
+                    value={field.value}
+                    inputType="input"
+                    onChange={field.onChange}
+                    fullWidth
+                    className="picker-color"
+                  />
+                )}
+              />
+            </div>
+          </div>
+          <div className="flex mb-2">
+            <div className="flex-1">
+              <Controller
+                name="User.Value"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
+                    type="text"
+                    placeholder="Nhập text"
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[50px] mx-2">
+              <Controller
+                name="User.FontSize"
+                control={control}
+                render={({ field }) => (
+                  <NumericFormat
+                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
+                    type="text"
+                    placeholder="Nhập cỡ chữ"
+                    value={field.value}
+                    onValueChange={({ floatValue }) =>
+                      field.onChange(floatValue)
+                    }
+                  />
+                )}
+              />
+            </div>
+            <div className="w-[46px]">
+              <Controller
+                name="User.Color"
                 control={control}
                 render={({ field }) => (
                   <ColorPicker
@@ -507,7 +627,7 @@ function Template12() {
       </div>
       <div className="flex flex-col flex-1 h-full w-full md:w-[calc(100%-300px)] lg:w-[calc(100%-400px)] md:order-last order-first">
         <div
-          className="relative items-center justify-center overflow-hidden md:flex grow md:overflow-auto font-alegreya aspect-square"
+          className="relative items-center justify-center overflow-hidden md:flex grow md:overflow-auto aspect-square"
           ref={elRef}
         >
           <div
@@ -522,73 +642,203 @@ function Template12() {
               transformOrigin: "0 0",
             }}
           >
-            <div className="h-full px-20 pt-16">
-              <div>
-                <div
-                  className="text-center tracking-[4px] uppercase leading-10 font-gentium"
-                  style={{
-                    color: Title.Color,
-                    fontSize: Title.FontSize + "px",
-                  }}
-                >
-                  {Title.Value}
-                </div>
-                <div
-                  className="w-[40%] text-center m-auto leading-[50px] font-ephesis"
-                  style={{
-                    fontSize: Slogan.FontSize + "px",
-                    color: Slogan.Color,
-                  }}
-                >
-                  {Slogan.Value}
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-6 mt-10">
-                <div>
+            <div className="w-full h-full grid grid-cols-2 relative">
+              <div className="h-full bg-[#B5D0E2]"></div>
+              <div className="h-full bg-[#D3E6F2]"></div>
+              <div className="absolute w-full h-full">
+                <div className="absolute -rotate-90 top-0 left-0 w-full h-full pt-5">
                   <div
-                    className="mb-1 font-light text-center uppercase"
+                    className="uppercase font-play text-center"
                     style={{
-                      fontSize: Before.FontSize + "px",
-                      color: Before.Color,
+                      fontSize: Title.FontSize + "px",
+                      color: Title.Color,
                     }}
                   >
-                    {Before.Title}
-                  </div>
-                  <div className="overflow-hidden rounded-tl-[25px] rounded-br-[25px] aspect-square">
-                    <img
-                      className="object-cover w-full h-full"
-                      src={toAbsolutePath(Images)}
-                      alt=""
-                    />
+                    {Title.Value}
                   </div>
                 </div>
-                <div className="pt-20">
-                  <div className="overflow-hidden rounded-tl-[25px] rounded-br-[25px] aspect-square">
-                    <img
-                      className="object-cover w-full h-full"
-                      src={toAbsolutePath(Images2)}
-                      alt=""
-                    />
-                  </div>
-                  <div
-                    className="mt-1 font-light text-center uppercase"
-                    style={{
-                      fontSize: After.FontSize + "px",
-                      color: After.Color,
-                    }}
-                  >
-                    {After.Title}
+                <div className="absolute -rotate-90 top-0 right-0 h-full w-full">
+                  <div className="absolute left-0 bottom-16 w-full text-center">
+                    <div className="absolute w-full h-[1px] bg-[#303030] top-[15px]"></div>
+                    <span
+                      className="font-play font-semibold relative bg-[#D3E6F2] px-8"
+                      style={{
+                        color: Copyright.Color,
+                        fontSize: Copyright.FontSize + "px",
+                      }}
+                    >
+                      {Copyright.Value}
+                    </span>
                   </div>
                 </div>
-              </div>
-              <div className="flex justify-center pt-10">
-                <div
-                  style={{
-                    color: Copyright.Color,
-                    fontSize: Copyright.FontSize + "px",
-                  }}
-                >
-                  {Copyright.Value}
+                <div className="absolute w-[55%] h-[80%] overflow-hidden top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4">
+                  <div className="px-5">
+                    <div className="bg-white rounded-t-[15px] overflow-hidden">
+                      <div className="flex items-center p-4">
+                        <div>
+                          <img
+                            className="w-10 h-10 rounded-full overflow-hidden object-cover"
+                            src={toAbsolutePath(User1)}
+                            alt=""
+                          />
+                        </div>
+                        <div
+                          className="flex-1 px-4"
+                          style={{
+                            color: Slogan.Color,
+                            fontSize: Slogan.FontSize + "px",
+                          }}
+                        >
+                          {Slogan.Value}
+                        </div>
+                        <div>
+                          <ShareIcon className="w-6" />
+                        </div>
+                      </div>
+                      <div>
+                        <img
+                          className="w-full object-cover h-[194px]"
+                          src={toAbsolutePath(Images)}
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-[15px] p-6">
+                    <div className="flex items-center mb-5">
+                      <HeartIcon className="w-8 text-[#F44336] mr-2" />
+                      <svg
+                        id="SvgjsSvg1001"
+                        width={24}
+                        height={24}
+                        xmlns="http://www.w3.org/2000/svg"
+                        version="1.1"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                      >
+                        <defs id="SvgjsDefs1002" />
+                        <g id="SvgjsG1008">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 16 16"
+                            width={24}
+                            height={24}
+                          >
+                            <path
+                              fill="url(#a)"
+                              d="M16 8A8 8 0 1 1-.001 8 8 8 0 0 1 16 8"
+                            />
+                            <path
+                              fill="url(#b)"
+                              d="M3 8.008C3 10.023 4.006 14 8 14c3.993 0 5-3.977 5-5.992C13 7.849 11.39 7 8 7c-3.39 0-5 .849-5 1.008Z"
+                            />
+                            <path
+                              fill="url(#c)"
+                              d="M4.541 12.5c.804.995 1.907 1.5 3.469 1.5 1.563 0 2.655-.505 3.459-1.5-.551-.588-1.599-1.5-3.459-1.5s-2.917.912-3.469 1.5Z"
+                            />
+                            <path
+                              fill="#2a3755"
+                              d="M6.213 4.144c.263.188.502.455.41.788-.071.254-.194.369-.422.37-.78.012-1.708.256-2.506.613-.065.029-.197.088-.332.085-.124-.003-.251-.058-.327-.237-.067-.157-.073-.388.276-.598.545-.33 1.257-.48 1.909-.604-.41-.303-.85-.56-1.315-.768-.427-.194-.38-.457-.323-.6.127-.317.609-.196 1.078.026a9 9 0 0 1 1.552.925Zm3.577 0a8.955 8.955 0 0 1 1.55-.925c.47-.222.95-.343 1.078-.026.057.143.104.406-.323.6a7.028 7.028 0 0 0-1.313.768c.65.123 1.363.274 1.907.604.349.21.342.44.276.598-.077.18-.203.234-.327.237-.135.003-.267-.056-.332-.085-.797-.357-1.725-.6-2.504-.612-.228-.002-.351-.117-.422-.37-.091-.333.147-.6.41-.788v-.001Z"
+                              className="color2A3755 svgShape"
+                            />
+                            <defs>
+                              <linearGradient
+                                id="a"
+                                x1={8}
+                                x2={8}
+                                y1="1.64"
+                                y2={16}
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  stopColor="#feea70"
+                                  className="stopColorFEEA70 svgShape"
+                                />
+                                <stop
+                                  offset={1}
+                                  stopColor="#f69b30"
+                                  className="stopColorF69B30 svgShape"
+                                />
+                              </linearGradient>
+                              <linearGradient
+                                id="b"
+                                x1={8}
+                                x2={8}
+                                y1={7}
+                                y2={14}
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  stopColor="#472315"
+                                  className="stopColor472315 svgShape"
+                                />
+                                <stop
+                                  offset={1}
+                                  stopColor="#8b3a0e"
+                                  className="stopColor8B3A0E svgShape"
+                                />
+                              </linearGradient>
+                              <linearGradient
+                                id="c"
+                                x1="8.005"
+                                x2="8.005"
+                                y1={11}
+                                y2="13.457"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  stopColor="#fc607c"
+                                  className="stopColorFC607C svgShape"
+                                />
+                                <stop
+                                  offset={1}
+                                  stopColor="#d91f3a"
+                                  className="stopColorD91F3A svgShape"
+                                />
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </g>
+                      </svg>
+                    </div>
+                    <div
+                      className="line-clamp-3"
+                      style={{
+                        color: Desc.Color,
+                        fontSize: Desc.FontSize + "px",
+                      }}
+                    >
+                      {Desc.Value}
+                    </div>
+                    <div className="flex items-center mt-5">
+                      <div>
+                        <img
+                          className="w-14 h-14 rounded-full overflow-hidden object-cover"
+                          src={toAbsolutePath(User2)}
+                          alt=""
+                        />
+                      </div>
+                      <div className="pl-4">
+                        <div
+                          className="font-semibold"
+                          style={{
+                            color: User.TitleColor,
+                            fontSize: User.TitleFontSize + "px",
+                          }}
+                        >
+                          {User.Title}
+                        </div>
+                        <div
+                          style={{
+                            color: User.TitleColor,
+                            fontSize: User.TitleFontSize + "px",
+                          }}
+                        >
+                          {User.Value}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -659,4 +909,4 @@ function Template12() {
   );
 }
 
-export default Template12;
+export default Template14;

@@ -87,7 +87,7 @@ function Template11() {
       .then(function (image) {
         componentRef?.current?.classList.add("el-scale");
         var bodyFormData = new FormData();
-        bodyFormData.append("title", "mau-10-" + new Date().valueOf());
+        bodyFormData.append("title", "mau-11-" + new Date().valueOf());
         bodyFormData.append("base64", image);
         axios
           .post(

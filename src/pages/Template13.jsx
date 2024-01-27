@@ -38,16 +38,13 @@ function Template13() {
   const elRef = useRef();
 
   const {
-    Title,
     Images,
     Background,
-    Slogan,
     Width,
     Height,
     Images2,
     Before,
     After,
-    Copyright,
   } = watch();
 
   useEffect(() => {
@@ -82,7 +79,7 @@ function Template13() {
       .then(function (image) {
         componentRef?.current?.classList.add("el-scale");
         var bodyFormData = new FormData();
-        bodyFormData.append("title", "mau-10-" + new Date().valueOf());
+        bodyFormData.append("title", "mau-13-" + new Date().valueOf());
         bodyFormData.append("base64", image);
         axios
           .post(
@@ -377,14 +374,14 @@ function Template13() {
               <div className="grid grid-cols-1 gap-2 px-24 py-2 grow">
                 <div className="py-2 overflow-hidden">
                   <img
-                    className="object-cover w-full h-full border border-[#919191] rounded-[100px]"
+                    className="object-cover w-full h-[170px] border border-[#919191] rounded-[100px]"
                     src={toAbsolutePath(Images)}
                     alt=""
                   />
                 </div>
                 <div className="py-2 overflow-hidden">
                   <img
-                    className="object-cover w-full h-full border border-[#919191] rounded-[100px]"
+                    className="object-cover w-full h-[170px] border border-[#919191] rounded-[100px]"
                     src={toAbsolutePath(Images2)}
                     alt=""
                   />
