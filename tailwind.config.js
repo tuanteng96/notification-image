@@ -17,7 +17,8 @@ export default {
             'ephesis': ['Ephesis', 'system-ui'],
             'play': ['Playfair Display', 'system-ui'],
             'gentium': ['Gentium Plus'],
-            'georama': ['Georama', 'system-ui']
+            'georama': ['Georama', 'system-ui'],
+            'thasadith': ['Thasadith', 'system-ui']
         }
     },
     plugins: [],
