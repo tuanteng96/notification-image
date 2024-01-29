@@ -23,6 +23,9 @@ import Template16 from "./pages/Template16";
 import Template17 from "./pages/Template17";
 import Template18 from "./pages/Template18";
 import Template19 from "./pages/Template19";
+import Template20 from "./pages/Template20";
+import Template21 from "./pages/Template21";
+import Template22 from "./pages/Template22";
 
 const router = createBrowserRouter([
   {
@@ -104,6 +107,18 @@ const router = createBrowserRouter([
       {
         path: "/thietke/source/index.html/19",
         element: <Template19 />,
+      },
+      {
+        path: "/thietke/source/index.html/20",
+        element: <Template20 />,
+      },
+      {
+        path: "/thietke/source/index.html/21",
+        element: <Template21 />,
+      },
+      {
+        path: "/thietke/source/index.html/22",
+        element: <Template22 />,
       },
     ],
   },

@@ -7,35 +7,30 @@ import axios from "axios";
 import { toAbsolutePath } from "../helpers/assetPath";
 import * as htmlToImage from "html-to-image";
 
-function Template19() {
+function Template21() {
   const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       Title: {
-        Value: "New Product",
-        FontSize: 55,
-        Color: "#420E07",
+        Value: "Beauty Skincare",
+        FontSize: 30,
+        Color: "#000000",
       },
       Slogan: {
-        Value: "Acne Serum",
-        FontSize: 30,
-        Color: "#420E07",
-      },
-      Desc: {
-        Value: "Available at the online and offline store",
-        FontSize: 17,
-        Color: "#420E07",
+        Value: "With Natural Ingredients",
+        FontSize: 16,
+        Color: "#000000",
       },
       Button: {
-        BackgroundColor: "#fff",
-        Title: "get it now",
-        Color: "#420E07",
+        Background: "#423C32",
+        Title: "New",
+        Color: "#fff",
         FontSize: 22,
       },
       BackgroundColor: "#B29776",
       Color: "#ffffff",
-      Images: "/Thietke/myimage/anh-19.jpg",
-      Background: "/Thietke/myimage/bg-19.png",
+      Images: "/Thietke/myimage/anh-21.png",
+      Background: "/Thietke/myimage/bg-21.png",
       Width: 600,
       Height: 600,
     },
@@ -48,17 +43,7 @@ function Template19() {
   const componentRef = useRef();
   const elRef = useRef();
 
-  const {
-    BackgroundColor,
-    Title,
-    Images,
-    Background,
-    Slogan,
-    Desc,
-    Width,
-    Height,
-    Button,
-  } = watch();
+  const { Title, Images, Background, Slogan, Width, Height, Button } = watch();
 
   useEffect(() => {
     if (elRef && elRef?.current) {
@@ -92,7 +77,7 @@ function Template19() {
       .then(function (image) {
         componentRef?.current?.classList.add("el-scale");
         var bodyFormData = new FormData();
-        bodyFormData.append("title", "mau-19-" + new Date().valueOf());
+        bodyFormData.append("title", "mau-21-" + new Date().valueOf());
         bodyFormData.append("base64", image);
         axios
           .post(
@@ -191,28 +176,6 @@ function Template19() {
         </div>
         <div className="mb-5">
           <div className="text-[12px] text-[#939393] mb-1 font-light">
-            Mùa chủ đạo
-          </div>
-          <div className="flex mb-2">
-            <div className="w-[46px] mx-2">
-              <Controller
-                name="BackgroundColor"
-                control={control}
-                render={({ field }) => (
-                  <ColorPicker
-                    value={field.value}
-                    inputType="input"
-                    onChange={field.onChange}
-                    fullWidth
-                    className="picker-color picker-color-left"
-                  />
-                )}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="mb-5">
-          <div className="text-[12px] text-[#939393] mb-1 font-light">
             Nhập tiêu đề / Cỡ chữ / Màu sắc
           </div>
           <div className="flex mb-2">
@@ -265,7 +228,7 @@ function Template19() {
               />
             </div>
           </div>
-          <div className="flex mb-2">
+          <div className="flex">
             <div className="flex-1">
               <Controller
                 name="Slogan.Value"
@@ -313,58 +276,10 @@ function Template19() {
               />
             </div>
           </div>
-          <div className="flex">
-            <div className="flex-1">
-              <Controller
-                name="Desc.Value"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition"
-                    type="text"
-                    placeholder="Nhập text"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[50px] mx-2">
-              <Controller
-                name="Desc.FontSize"
-                control={control}
-                render={({ field }) => (
-                  <NumericFormat
-                    className="h-12 w-full border border-[#bfc4c8] rounded focus:outline-none px-3 focus:border-primary transition text-center"
-                    type="text"
-                    placeholder="Nhập cỡ chữ"
-                    value={field.value}
-                    onValueChange={({ floatValue }) =>
-                      field.onChange(floatValue)
-                    }
-                  />
-                )}
-              />
-            </div>
-            <div className="w-[46px]">
-              <Controller
-                name="Desc.Color"
-                control={control}
-                render={({ field }) => (
-                  <ColorPicker
-                    value={field.value}
-                    inputType="input"
-                    onChange={field.onChange}
-                    fullWidth
-                    className="picker-color"
-                  />
-                )}
-              />
-            </div>
-          </div>
         </div>
         <div>
           <div className="text-[12px] text-[#939393] mb-1 font-light">
-            Tiêu đề Button / Màu nền / Màu chữ / Cỡ chữ
+            Tiêu đề / Màu nền / Màu chữ / Cỡ chữ
           </div>
           <div className="flex">
             <div className="flex-1">
@@ -383,7 +298,7 @@ function Template19() {
             </div>
             <div className="w-[46px] ml-2">
               <Controller
-                name="Button.BackgroundColor"
+                name="Button.Background"
                 control={control}
                 render={({ field }) => (
                   <ColorPicker
@@ -449,66 +364,44 @@ function Template19() {
             }}
           >
             <div className="relative flex flex-col h-full">
-              <div className="absolute w-[450px] h-[450px] left-5 z-10 top-2/4 -translate-y-2/4 p-4">
+              <div className="absolute h-[380px] w-[380px] top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4">
                 <img
-                  className="object-cover w-full h-full rounded-full"
+                  className="z-10 object-cover w-full h-full rrelative"
                   src={toAbsolutePath(Images)}
                   alt=""
                 />
-                <div className="absolute w-full h-[222px] -left-[118px] top-[115px] rounded-t-[450px] border-[3px] -rotate-[90deg] border-b-0" style={{
-                  borderColor: BackgroundColor
-                }}></div>
-              </div>
-              <div className="absolute right-0 top-0 w-[200px] h-full flex flex-col justify-center items-center z-10">
-                <div className="pr-10 text-right">
-                  <div
-                    className="mb-10 font-play"
-                    style={{
-                      color: Title.Color,
-                      fontSize: Title.FontSize + "px",
-                      lineHeight: Title.FontSize + 5 + "px",
-                    }}
-                  >
-                    {Title.Value}
-                  </div>
-                  <div className="flex justify-end pr-5">
-                    <div className="w-[100px] h-[1px] bg-black"></div>
-                  </div>
-                  <div
-                    className="mt-5 font-play"
-                    style={{
-                      color: Slogan.Color,
-                      fontSize: Slogan.FontSize + "px",
-                      lineHeight: Slogan.FontSize + "px"
-                    }}
-                  >
-                    {Slogan.Value}
-                  </div>
-                  <div
-                    className="my-5 font-light"
-                    style={{
-                      color: Desc.Color,
-                      fontSize: Desc.FontSize + "px",
-                      lineHeight: Desc.FontSize + 3 + "px",
-                    }}
-                  >
-                    {Desc.Value}
-                  </div>
-                  <div>
-                    <div
-                      className="uppercase inline-block font-bold px-5 py-1.5 rounded-lg tracking-[2px]"
-                      style={{
-                        fontSize: Button.FontSize + "px",
-                        background: Button.BackgroundColor,
-                        color: Button.Color,
-                      }}
-                    >
-                      {Button.Title}
-                    </div>
-                  </div>
+                <div
+                  className="absolute w-[100px] h-[100px] uppercase text-[22px] rounded-full flex items-center justify-center z-20 -top-10 -right-10"
+                  style={{
+                    background: Button.Background,
+                    color: Button.Color,
+                    fontSize: Button.FontSize + "px",
+                  }}
+                >
+                  {Button.Title}
                 </div>
               </div>
-              
+              <div className="absolute bottom-8 left-16">
+                <div
+                  className="font-bold font-georama"
+                  style={{
+                    color: Title.Color,
+                    fontSize: Title.FontSize + "px",
+                  }}
+                >
+                  {Title.Value}
+                </div>
+                <div
+                  className="font-light"
+                  style={{
+                    color: Slogan.Color,
+                    fontSize: Slogan.FontSize + "px",
+                    lineHeight: Slogan.FontSize + 5 + "px",
+                  }}
+                >
+                  {Slogan.Value}
+                </div>
+              </div>
             </div>
           </div>
           <button
@@ -577,4 +470,4 @@ function Template19() {
   );
 }
 
-export default Template19;
+export default Template21;
