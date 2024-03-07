@@ -108,7 +108,7 @@ function Template23() {
         axios
           .post(
             `${
-              import.meta.env.DEV ? "https://cser.vn" : ""
+              import.meta.env.MODE === "development" ? "https://cser.vn" : ""
             }/api/v3/file?cmd=base64`,
             bodyFormData,
             {
